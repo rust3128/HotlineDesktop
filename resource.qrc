@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Images/support64.png</file>
+        <file>Images/support128.png</file>
+        <file>Images/supportIcon.ico</file>
+    </qresource>
+</RCC>
