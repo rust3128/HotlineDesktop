@@ -37,14 +37,30 @@
     <property name="title">
      <string>Справ&amp;ка</string>
     </property>
+    <addaction name="actionAbout"/>
+    <addaction name="action_Qt"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
+   </property>
    <property name="text">
     <string>В&amp;ыход</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>О &amp;Программе</string>
+   </property>
+  </action>
+  <action name="action_Qt">
+   <property name="text">
+    <string>О &amp;Qt</string>
    </property>
   </action>
  </widget>
