@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>822</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -40,14 +40,30 @@
     <addaction name="actionAbout"/>
     <addaction name="action_Qt"/>
    </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Настройка</string>
+    </property>
+    <widget class="QMenu" name="menu">
+     <property name="title">
+      <string>Клиенты</string>
+     </property>
+     <addaction name="actionClientsList"/>
+     <addaction name="actionOkpo"/>
+     <addaction name="actionRegions"/>
+    </widget>
+    <addaction name="menu"/>
+    <addaction name="actionConnSettings"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/icon_exit.png</normaloff>:/Images/icon_exit.png</iconset>
    </property>
    <property name="text">
     <string>В&amp;ыход</string>
@@ -61,6 +77,34 @@
   <action name="action_Qt">
    <property name="text">
     <string>О &amp;Qt</string>
+   </property>
+  </action>
+  <action name="actionConnSettings">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/databasesettings32.png</normaloff>:/Images/databasesettings32.png</iconset>
+   </property>
+   <property name="text">
+    <string>База данных</string>
+   </property>
+  </action>
+  <action name="actionClientsList">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/clients.png</normaloff>:/Images/clients.png</iconset>
+   </property>
+   <property name="text">
+    <string>Список клиентов</string>
+   </property>
+  </action>
+  <action name="actionOkpo">
+   <property name="text">
+    <string>Юр.Лица</string>
+   </property>
+  </action>
+  <action name="actionRegions">
+   <property name="text">
+    <string>Регионы</string>
    </property>
   </action>
  </widget>

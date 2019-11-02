@@ -3,5 +3,9 @@
         <file>Images/support64.png</file>
         <file>Images/support128.png</file>
         <file>Images/supportIcon.ico</file>
+        <file>Images/icon_exit.png</file>
+        <file>Images/databasesettings32.png</file>
+        <file>Images/databasesettings128.png</file>
+        <file>Images/clients.png</file>
     </qresource>
 </RCC>

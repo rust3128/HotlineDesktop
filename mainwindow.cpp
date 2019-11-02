@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "ConnectionSettingDialog/connectionsettingdialog.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -14,6 +15,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::on_actionConnSettings_triggered()
+{
+    ConnectionSettingDialog *connDlg = new ConnectionSettingDialog(this);
+    connDlg->exec();
+}
 
 void MainWindow::on_actionExit_triggered()
 {
@@ -22,11 +28,12 @@ void MainWindow::on_actionExit_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::about(this, tr("О Программе Hotline Desctop"),
-             tr("Программа <b>Hotline Desctop</b> создана для облегчения работы сотрудников Горячей Линиии."));
+    QMessageBox::about(this, tr("О Программе Hotline Desktop"),
+             tr("Программа <b>Hotline Desktop</b> создана для облегчения работы сотрудников Горячей Линиии."));
 }
 
 void MainWindow::on_action_Qt_triggered()
 {
     QApplication::aboutQt();
 }
+

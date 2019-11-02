@@ -22,6 +22,8 @@ private slots:
 
     void on_action_Qt_triggered();
 
+    void on_actionConnSettings_triggered();
+
 private:
     Ui::MainWindow *ui;
 };
