@@ -18,6 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 win32: RC_ICONS = $$PWD/Images/supportIcon.ico
 
 SOURCES += \
+    Clients/addclientdialog.cpp \
+    Clients/clientslistdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
     GlobalSettings/globalsettings.cpp \
@@ -26,6 +28,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Clients/addclientdialog.h \
+    Clients/clientslistdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
     GlobalSettings/globalsettings.h \
@@ -33,6 +37,8 @@ HEADERS += \
     mainwindow.h
 
 FORMS += \
+    Clients/addclientdialog.ui \
+    Clients/clientslistdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
     mainwindow.ui
 

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ConnectionSettingDialog/connectionsettingdialog.h"
+#include "Clients/clientslistdialog.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -21,6 +22,13 @@ void MainWindow::on_actionConnSettings_triggered()
     connDlg->exec();
 }
 
+void MainWindow::on_actionClientsList_triggered()
+{
+    ClientsListDialog *clDlg = new ClientsListDialog(this);
+    clDlg->exec();
+}
+
+
 void MainWindow::on_actionExit_triggered()
 {
     QCoreApplication::quit();
@@ -36,4 +44,5 @@ void MainWindow::on_action_Qt_triggered()
 {
     QApplication::aboutQt();
 }
+
 
