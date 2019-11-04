@@ -2,6 +2,7 @@
 #define ADDCLIENTDIALOG_H
 
 #include <QDialog>
+#include <QSqlRecord>
 
 namespace Ui {
 class AddClientDialog;
@@ -12,7 +13,7 @@ class AddClientDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddClientDialog(QWidget *parent = nullptr);
+    explicit AddClientDialog(QSqlRecord *rec, QWidget *parent = nullptr);
     ~AddClientDialog();
 
 private slots:
@@ -27,8 +28,11 @@ private slots:
     void on_lineEditName_textChanged(const QString &name);
 
 private:
+    void createUI();
+private:
     Ui::AddClientDialog *ui;
     QByteArray inByteArray;
+    QSqlRecord *record;
 };
 
 #endif // ADDCLIENTDIALOG_H

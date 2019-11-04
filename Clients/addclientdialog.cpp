@@ -8,13 +8,13 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
-AddClientDialog::AddClientDialog(QWidget *parent) :
+AddClientDialog::AddClientDialog(QSqlRecord *rec, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::AddClientDialog)
+    ui(new Ui::AddClientDialog),
+    record(rec)
 {
     ui->setupUi(this);
-
-    ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(false);
+    createUI();
 }
 
 AddClientDialog::~AddClientDialog()
@@ -33,6 +33,12 @@ void AddClientDialog::on_pushButtonLoad_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть логотип"), "", tr("Изображения (*.png *.jpeg *.jpg)"));
     QPixmap inPixmap(fileName); // Сохраняем его в изображение объекта QPixmap;
+
+    if(inPixmap.width()>400 || inPixmap.height()>300){
+        QMessageBox::warning(this,"Внимание","Размер логотипа слишком большой. Выберите другой файл.");
+        return;
+    }
+
     ui->labelLogo->setPixmap(inPixmap);
     QBuffer inBuffer( &inByteArray );                   // Сохранение изображения производим через буффер
     inBuffer.open( QIODevice::WriteOnly );              // Открываем буффер
@@ -41,21 +47,38 @@ void AddClientDialog::on_pushButtonLoad_clicked()
 
 void AddClientDialog::on_buttonBox_accepted()
 {
-    int result = QMessageBox::question(this,tr("Вопрос"),
-                                       QString(tr("Вы дейстиветльно хотите добавить клиента %1 в базу данных?"))
-                                       .arg(ui->lineEditName->text().trimmed()));
-    if(result == QMessageBox::Yes){
+
+    if(record->isEmpty()){
+        int result = QMessageBox::question(this,tr("Вопрос"),
+                                           QString(tr("Вы дейстиветльно хотите добавить клиента %1 в базу данных?"))
+                                           .arg(ui->lineEditName->text().trimmed()));
+        if(result == QMessageBox::Yes){
+            QSqlQuery q;
+            q.prepare("INSERT INTO CLIENTS (CLIENT_ID, NAME, LOGO, COMMENTS) "
+                      "VALUES (GEN_ID(GEN_CLIENTS_ID,1), :name, :logo, :comments)");
+            q.bindValue(":name", ui->lineEditName->text().trimmed());
+            q.bindValue(":logo", inByteArray);
+            q.bindValue(":comments", ui->plainTextEdit->toPlainText());
+            if(!q.exec()) {
+                qCritical(logCritical()) << "Не возможно добавить клиента." << endl << q.lastError().text();
+                return;
+            }
+            qInfo(logInfo()) << "Клиент добавлен.";
+        }
+    } else {
         QSqlQuery q;
-        q.prepare("INSERT INTO CLIENTS (CLIENT_ID, NAME, LOGO, COMMENTS) "
-                  "VALUES (GEN_ID(GEN_CLIENTS_ID,1), :name, :logo, :comments)");
+
+        q.prepare("UPDATE CLIENTS SET NAME = :name, LOGO = :logo, COMMENTS = :comments "
+                  "WHERE CLIENT_ID = :clientID");
         q.bindValue(":name", ui->lineEditName->text().trimmed());
         q.bindValue(":logo", inByteArray);
         q.bindValue(":comments", ui->plainTextEdit->toPlainText());
+        q.bindValue(":clientID", record->value(0).toInt());
         if(!q.exec()) {
-            qCritical(logCritical()) << "Не возможно добавить клиента." << endl << q.lastError().text();
+            qCritical(logCritical()) << "Не возможно обновить данные клиента." << endl << q.lastError().text();
             return;
         }
-        qInfo(logInfo()) << "Клиент изменен.";
+        qInfo(logInfo()) << "Информация о клиенте обновлена.";
     }
     this->accept();
 }
@@ -69,4 +92,21 @@ void AddClientDialog::on_lineEditName_textChanged(const QString &name)
 {
     bool enabled = (name.length() >2) ? true : false;
     ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(enabled);
+}
+
+void AddClientDialog::createUI()
+{
+    if(record->isEmpty()){
+        ui->buttonBox->button(QDialogButtonBox::Save)->setEnabled(false);
+        return;
+    }
+    this->setWindowTitle(tr("Редактирование данных клиента"));
+    ui->lineEditName->setText(record->value(1).toString());
+    QPixmap outPixmap = QPixmap();
+    outPixmap.loadFromData(record->value(2).toByteArray());
+    if(!outPixmap.isNull())
+        ui->labelLogo->setPixmap(outPixmap);
+    else
+        ui->labelLogo->setText("Логотип отсутствует");
+    ui->plainTextEdit->setPlainText(record->value(3).toString());
 }

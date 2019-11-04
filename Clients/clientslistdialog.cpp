@@ -1,7 +1,9 @@
 #include "clientslistdialog.h"
 #include "ui_clientslistdialog.h"
 #include "Clients/addclientdialog.h"
+#include "LoggingCategories/loggingcategories.h"
 #include <QPushButton>
+#include <QKeyEvent>
 
 ClientsListDialog::ClientsListDialog(QWidget *parent) :
     QDialog(parent),
@@ -39,12 +41,14 @@ void ClientsListDialog::createModel()
     modelClients->setTable("CLIENTS");
     modelClients->setHeaderData(1,Qt::Horizontal,"Наименование");
     modelClients->setHeaderData(3,Qt::Horizontal,"Коментарии");
+    currentRecord = new QSqlRecord();
 
 }
 
 void ClientsListDialog::on_buttonBox_accepted()
 {
-    AddClientDialog *addClient = new AddClientDialog(this);
+    currentRecord->clear();
+    AddClientDialog *addClient = new AddClientDialog(currentRecord, this);
     addClient->exec();
     modelClients->select();
     ui->tableViewList->resizeColumnsToContents();
@@ -63,4 +67,20 @@ void ClientsListDialog::slotCurrentPic(QModelIndex idx)
         ui->labelLogo->setPixmap(outPixmap.scaledToWidth(150));
     else
         ui->labelLogo->setText("Логотип отсутствует");
+}
+
+void ClientsListDialog::on_buttonBox_rejected()
+{
+    this->reject();
+}
+
+void ClientsListDialog::on_tableViewList_doubleClicked(const QModelIndex &idx)
+{
+    QSqlRecord r = modelClients->record(idx.row());
+    currentRecord = &r;
+    AddClientDialog *addClient = new AddClientDialog(currentRecord, this);
+    addClient->exec();
+    modelClients->select();
+    ui->tableViewList->resizeColumnsToContents();
+
 }

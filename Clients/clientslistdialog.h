@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QSqlTableModel>
+#include <QSqlRecord>
 
 
 namespace Ui {
@@ -21,12 +22,17 @@ private slots:
     void on_buttonBox_accepted();
     void slotCurrentPic(QModelIndex idx);
 
+    void on_buttonBox_rejected();
+
+    void on_tableViewList_doubleClicked(const QModelIndex &idx);
+
 private:
     void createUI();
     void createModel();
 private:
     Ui::ClientsListDialog *ui;
     QSqlTableModel *modelClients;
+    QSqlRecord *currentRecord;
 };
 
 #endif // CLIENTSLISTDIALOG_H
