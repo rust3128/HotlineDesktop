@@ -7,5 +7,6 @@
         <file>Images/databasesettings32.png</file>
         <file>Images/databasesettings128.png</file>
         <file>Images/clients.png</file>
+        <file>Images/filecabinet.png</file>
     </qresource>
 </RCC>

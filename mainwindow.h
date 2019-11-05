@@ -26,6 +26,8 @@ private slots:
 
     void on_actionClientsList_triggered();
 
+    void on_actionFirms_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

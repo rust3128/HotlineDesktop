@@ -24,7 +24,7 @@
      <x>0</x>
      <y>0</y>
      <width>822</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -49,7 +49,7 @@
       <string>Клиенты</string>
      </property>
      <addaction name="actionClientsList"/>
-     <addaction name="actionOkpo"/>
+     <addaction name="actionFirms"/>
      <addaction name="actionRegions"/>
     </widget>
     <addaction name="menu"/>
@@ -97,7 +97,11 @@
     <string>Список клиентов</string>
    </property>
   </action>
-  <action name="actionOkpo">
+  <action name="actionFirms">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/filecabinet.png</normaloff>:/Images/filecabinet.png</iconset>
+   </property>
    <property name="text">
     <string>Юр.Лица</string>
    </property>

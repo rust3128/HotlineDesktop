@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "ConnectionSettingDialog/connectionsettingdialog.h"
 #include "Clients/clientslistdialog.h"
+#include "Clients/firmsdialog.h"
 #include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -46,3 +47,9 @@ void MainWindow::on_action_Qt_triggered()
 }
 
 
+
+void MainWindow::on_actionFirms_triggered()
+{
+    FirmsDialog *firmsDlg = new FirmsDialog(this);
+    firmsDlg->exec();
+}
