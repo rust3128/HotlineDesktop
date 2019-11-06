@@ -24,14 +24,24 @@ private slots:
 
     void on_buttonBox_rejected();
 
+    void on_listViewClients_doubleClicked(const QModelIndex &idx);
+
+    void on_comboBoxClients_activated(int idx);
+
+    void on_pushButtonAdd_clicked();
+
 private:
     void createUI();
     void createModels();
+    void addFirms();
+    void setFilterClients();
+    void showFirmInfo(QModelIndex idx);
 private:
     Ui::FirmsDialog *ui;
     QSqlQueryModel *modelClients;
     QSqlTableModel *modelFirms;
-    qint16 currentClientID;
+    int currentClientID;
+    int currentFirmID;
     QString strFilter;
 };
 

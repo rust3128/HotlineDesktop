@@ -34,7 +34,7 @@ void AddClientDialog::on_pushButtonLoad_clicked()
     QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть логотип"), "", tr("Изображения (*.png *.jpeg *.jpg)"));
     QPixmap inPixmap(fileName); // Сохраняем его в изображение объекта QPixmap;
 
-    if(inPixmap.width()>400 || inPixmap.height()>300){
+    if(inPixmap.width()>800 || inPixmap.height()>600){
         QMessageBox::warning(this,"Внимание","Размер логотипа слишком большой. Выберите другой файл.");
         return;
     }
