@@ -9,6 +9,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QBuffer>
+#include <QHBoxLayout>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -70,7 +71,7 @@ void MainWindow::on_actionFirms_triggered()
 
 void MainWindow::slotGetNumberButton()
 {
-    DynamiicButton *button = (DynamiicButton*)sender();
+    DynamiicButton *button = static_cast<DynamiicButton*>(sender());
     int clientID=button->getButtonID();
     qInfo(logInfo()) << "Client ID" << clientID;
 }
@@ -86,6 +87,7 @@ void MainWindow::setToolBarClients()
     }
     while(q.next()){
          DynamiicButton *button = new DynamiicButton(q.value(0).toInt(),this);
+                 ui->toolBarClients->addSeparator();
          button->setText(q.value(1).toString());
 
          QPixmap outPixmap;
@@ -97,7 +99,9 @@ void MainWindow::setToolBarClients()
          QString html = QString("<img src='data:image/png;base64, %0'>").arg(QString(byteArray.toBase64()));
          button->setToolTip(html);
          button->setToolTipDuration(1000);
+         button->setFlat(true);
          ui->toolBarClients->addWidget(button);
+
          connect(button,&QAbstractButton::clicked,this,&MainWindow::slotGetNumberButton);
     }
     q.finish();
