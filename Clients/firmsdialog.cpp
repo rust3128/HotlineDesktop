@@ -36,6 +36,8 @@ void FirmsDialog::createUI()
 
     ui->listViewClients->setModel(modelFirms);
     ui->listViewClients->setModelColumn(2);
+
+    connect(ui->listViewClients->selectionModel(),&QItemSelectionModel::selectionChanged,this,&FirmsDialog::slotFirmChanged);
 }
 
 void FirmsDialog::createModels()
@@ -153,4 +155,9 @@ void FirmsDialog::showFirmInfo(QModelIndex idx)
 void FirmsDialog::on_pushButtonAdd_clicked()
 {
     addFirms();
+}
+
+void FirmsDialog::slotFirmChanged(QItemSelection selection)
+{
+    showFirmInfo(selection.indexes().first());
 }

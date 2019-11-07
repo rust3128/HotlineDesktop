@@ -23,6 +23,7 @@ SOURCES += \
     Clients/firmsdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
+    DynamicButton/dynamiicbutton.cpp \
     GlobalSettings/globalsettings.cpp \
     LoggingCategories/loggingcategories.cpp \
     main.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     Clients/firmsdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
+    DynamicButton/dynamiicbutton.h \
     GlobalSettings/globalsettings.h \
     LoggingCategories/loggingcategories.h \
     mainwindow.h

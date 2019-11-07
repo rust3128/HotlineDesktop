@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QSqlTableModel>
 #include <QSqlQueryModel>
+#include <QItemSelection>
 #include <QSqlQuery>
 #include <QSqlError>
 
@@ -29,6 +30,7 @@ private slots:
     void on_comboBoxClients_activated(int idx);
 
     void on_pushButtonAdd_clicked();
+    void slotFirmChanged(QItemSelection selection);
 
 private:
     void createUI();

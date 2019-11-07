@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMdiArea>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,18 +18,16 @@ public:
 
 private slots:
     void on_actionExit_triggered();
-
     void on_actionAbout_triggered();
-
     void on_action_Qt_triggered();
-
     void on_actionConnSettings_triggered();
-
     void on_actionClientsList_triggered();
-
     void on_actionFirms_triggered();
-
+    void slotGetNumberButton();
+private:
+    void setToolBarClients();
 private:
     Ui::MainWindow *ui;
+    QMdiArea *mdiArea;
 };
 #endif // MAINWINDOW_H
