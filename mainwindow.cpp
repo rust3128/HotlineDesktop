@@ -4,12 +4,14 @@
 #include "LoggingCategories/loggingcategories.h"
 #include "Clients/clientslistdialog.h"
 #include "Clients/firmsdialog.h"
+#include "Clients/clientswindow.h"
 #include "DynamicButton/dynamiicbutton.h"
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QBuffer>
 #include <QHBoxLayout>
+#include <QMdiSubWindow>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -73,7 +75,21 @@ void MainWindow::slotGetNumberButton()
 {
     DynamiicButton *button = static_cast<DynamiicButton*>(sender());
     int clientID=button->getButtonID();
-    qInfo(logInfo()) << "Client ID" << clientID;
+    ClientsWindow *clnWnd = new ClientsWindow(clientID, this);
+    clnWnd->setWindowTitle(button->text());
+    if(mdiArea->subWindowList().size()>0){
+        for(int i=0; i<mdiArea->subWindowList().size();++i) {
+            if(mdiArea->subWindowList().at(i)->windowTitle() == button->text()) {
+                mdiArea->setActiveSubWindow(mdiArea->subWindowList().at(i));
+                return;
+            }
+
+        }
+    }
+    mdiArea->addSubWindow(clnWnd);
+    clnWnd->showMaximized();
+
+
 }
 
 void MainWindow::setToolBarClients()

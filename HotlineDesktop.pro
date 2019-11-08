@@ -20,6 +20,7 @@ win32: RC_ICONS = $$PWD/Images/supportIcon.ico
 SOURCES += \
     Clients/addclientdialog.cpp \
     Clients/clientslistdialog.cpp \
+    Clients/clientswindow.cpp \
     Clients/firmsdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
 HEADERS += \
     Clients/addclientdialog.h \
     Clients/clientslistdialog.h \
+    Clients/clientswindow.h \
     Clients/firmsdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
@@ -43,6 +45,7 @@ HEADERS += \
 FORMS += \
     Clients/addclientdialog.ui \
     Clients/clientslistdialog.ui \
+    Clients/clientswindow.ui \
     Clients/firmsdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
     mainwindow.ui
