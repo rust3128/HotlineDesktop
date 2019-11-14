@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     mdiArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     // Устанавливаем Mdi Area в качестве центрального виджета
     setCentralWidget(mdiArea);
-
+    ui->toolBarClients->setStyleSheet("background: #38395a;");
     setToolBarClients();
 }
 
@@ -103,20 +103,25 @@ void MainWindow::setToolBarClients()
     }
     while(q.next()){
          DynamiicButton *button = new DynamiicButton(q.value(0).toInt(),this);
-                 ui->toolBarClients->addSeparator();
          button->setText(q.value(1).toString());
-
-         QPixmap outPixmap;
-         outPixmap.loadFromData(q.value(2).toByteArray());
-         outPixmap = outPixmap.scaledToWidth(100);
-         QByteArray byteArray;
-         QBuffer buffer (&byteArray);
-         outPixmap.save(&buffer, "PNG");
-         QString html = QString("<img src='data:image/png;base64, %0'>").arg(QString(byteArray.toBase64()));
-         button->setToolTip(html);
-         button->setToolTipDuration(1000);
-         button->setFlat(true);
+         button->setStyleSheet("color: white;"
+                               "background-color: QLinearGradient( x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #88d, stop: 0.1 #444450, stop: 0.49 #444450, stop: 0.5 #3c3c46, stop: 1 #1f1f24);"
+                               "border-width: 1px;"
+                               "border-color: #141529;"
+                               "border-style: solid;"
+                               "border-radius:4;"
+                               "padding: 3px;"
+                               "font-size: 16px;"
+                               "font-variant:small-caps;"
+                               "font-family: courier;"
+                               "padding-left:5px;"
+                               "padding-right: 5px;"
+                               "min-width: 100px;"
+                               "max-width: 100px;"
+                               "min-height: 15px;"
+                               "max-height: 15px;");
          ui->toolBarClients->addWidget(button);
+
 
          connect(button,&QAbstractButton::clicked,this,&MainWindow::slotGetNumberButton);
     }

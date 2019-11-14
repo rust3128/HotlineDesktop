@@ -33,6 +33,7 @@ private:
     Ui::AddClientDialog *ui;
     QByteArray inByteArray;
     QSqlRecord *record;
+    QByteArray logoArray;
 };
 
 #endif // ADDCLIENTDIALOG_H

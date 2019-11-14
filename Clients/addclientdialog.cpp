@@ -71,7 +71,7 @@ void AddClientDialog::on_buttonBox_accepted()
         q.prepare("UPDATE CLIENTS SET NAME = :name, LOGO = :logo, COMMENTS = :comments "
                   "WHERE CLIENT_ID = :clientID");
         q.bindValue(":name", ui->lineEditName->text().trimmed());
-        q.bindValue(":logo", inByteArray);
+        q.bindValue(":logo",  (record->value(2).isNull()) ? inByteArray : logoArray);
         q.bindValue(":comments", ui->plainTextEdit->toPlainText());
         q.bindValue(":clientID", record->value(0).toInt());
         if(!q.exec()) {
@@ -103,7 +103,9 @@ void AddClientDialog::createUI()
     this->setWindowTitle(tr("Редактирование данных клиента"));
     ui->lineEditName->setText(record->value(1).toString());
     QPixmap outPixmap = QPixmap();
-    outPixmap.loadFromData(record->value(2).toByteArray());
+    logoArray = record->value(2).toByteArray();
+    qDebug(logDebug()) << "LogoArray" << logoArray;
+    outPixmap.loadFromData(logoArray);
     if(!outPixmap.isNull())
         ui->labelLogo->setPixmap(outPixmap);
     else
