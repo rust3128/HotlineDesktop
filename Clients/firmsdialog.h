@@ -17,7 +17,7 @@ class FirmsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit FirmsDialog(QWidget *parent = nullptr);
+    explicit FirmsDialog(int clientID, QWidget *parent = nullptr);
     ~FirmsDialog();
 
 private slots:

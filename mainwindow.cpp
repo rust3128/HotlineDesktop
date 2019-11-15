@@ -67,7 +67,7 @@ void MainWindow::on_action_Qt_triggered()
 
 void MainWindow::on_actionFirms_triggered()
 {
-    FirmsDialog *firmsDlg = new FirmsDialog(this);
+    FirmsDialog *firmsDlg = new FirmsDialog(-1,this);
     firmsDlg->exec();
 }
 

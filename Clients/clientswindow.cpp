@@ -1,5 +1,6 @@
 #include "clientswindow.h"
 #include "ui_clientswindow.h"
+#include "Clients/firmsdialog.h"
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     QMainWindow(parent),
@@ -33,4 +34,10 @@ void ClientsWindow::createUI()
     ui->labelName->setText(q.value(0).toString());
     ui->labelComments->setText(q.value(2).toString());
 
+}
+
+void ClientsWindow::on_pushButtonFirms_clicked()
+{
+    FirmsDialog *firmsDlg = new FirmsDialog(clientID,this);
+    firmsDlg->exec();
 }

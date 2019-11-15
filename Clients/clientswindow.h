@@ -17,6 +17,9 @@ public:
     explicit ClientsWindow(int clID, QWidget *parent = nullptr);
     ~ClientsWindow();
 
+private slots:
+    void on_pushButtonFirms_clicked();
+
 private:
     void createUI();
 private:

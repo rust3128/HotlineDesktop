@@ -8,5 +8,9 @@
         <file>Images/databasesettings128.png</file>
         <file>Images/clients.png</file>
         <file>Images/filecabinet.png</file>
+        <file>Images/information.png</file>
+        <file>Images/servers.png</file>
+        <file>Images/addIcon.png</file>
+        <file>Images/remove.png</file>
     </qresource>
 </RCC>

@@ -6,13 +6,13 @@
 #include <QInputDialog>
 #include <QDir>
 
-FirmsDialog::FirmsDialog(QWidget *parent) :
+FirmsDialog::FirmsDialog(int clientID, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::FirmsDialog)
+    ui(new Ui::FirmsDialog),
+    currentClientID(clientID)
 {
     ui->setupUi(this);
 
-    currentClientID = -1;
     createModels();
     createUI();
 }
@@ -34,6 +34,16 @@ void FirmsDialog::createUI()
     ui->comboBoxClients->setCurrentIndex(currentClientID);
     ui->comboBoxClients->setCurrentText("Выберите клиента...");
 
+    if(currentClientID !=-1){
+        ui->comboBoxClients->hide();
+        setFilterClients();
+        QModelIndex k = modelFirms->index(0,0);
+        ui->listViewClients->setCurrentIndex(k);
+        showFirmInfo(k);
+        ui->frameInfo->show();
+    }
+
+
     ui->listViewClients->setModel(modelFirms);
     ui->listViewClients->setModelColumn(2);
 
@@ -48,7 +58,6 @@ void FirmsDialog::createModels()
     modelFirms = new QSqlTableModel();
     modelFirms->setTable("FIRMS");
     setFilterClients();
-
 }
 
 
