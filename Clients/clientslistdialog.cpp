@@ -26,6 +26,7 @@ void ClientsListDialog::createUI()
     ui->tableViewList->setModel(modelClients);
     ui->tableViewList->setColumnHidden(0,true);
     ui->tableViewList->setColumnHidden(2,true);
+    ui->tableViewList->setColumnHidden(4,true);
 
     ui->tableViewList->verticalHeader()->hide();
     ui->tableViewList->horizontalHeader()->setStretchLastSection(true);
@@ -38,7 +39,7 @@ void ClientsListDialog::createUI()
 void ClientsListDialog::createModel()
 {
     modelClients = new QSqlTableModel();
-    modelClients->setTable("CLIENTS");
+    modelClients->setTable("clients");
     modelClients->setHeaderData(1,Qt::Horizontal,"Наименование");
     modelClients->setHeaderData(3,Qt::Horizontal,"Коментарии");
     currentRecord = new QSqlRecord();
@@ -82,5 +83,4 @@ void ClientsListDialog::on_tableViewList_doubleClicked(const QModelIndex &idx)
     addClient->exec();
     modelClients->select();
     ui->tableViewList->resizeColumnsToContents();
-
 }

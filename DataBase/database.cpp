@@ -19,8 +19,7 @@ bool DataBase::connectDB()
     bool result = false;
 
     QSettings settings(GlobalSettings::CONFIG_FILE_NAME, QSettings::IniFormat);
-    //Создаем подключение по умолчанию к базе данных FireBird
-    QSqlDatabase db = QSqlDatabase::addDatabase("QIBASE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
     //Установка параметров подключения из файла настроек
     settings.beginGroup("DATABASE");

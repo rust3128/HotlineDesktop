@@ -12,6 +12,9 @@
 #include <QBuffer>
 #include <QHBoxLayout>
 #include <QMdiSubWindow>
+#include <QWidget>
+#include <QLabel>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -94,9 +97,11 @@ void MainWindow::slotGetNumberButton()
 
 void MainWindow::setToolBarClients()
 {
+
+
     QSqlQuery q;
 
-    q.prepare("SELECT CLIENT_ID, NAME, LOGO, COMMENTS FROM clients ORDER BY CLIENT_ID");
+    q.prepare("SELECT client_id, name, logo, comments FROM clients WHERE isactive = 1 ORDER BY client_id");
     if(!q.exec()){
         qCritical(logCritical()) << "Не возможно получить список клиентов" << q.lastError().text();
         return;
@@ -120,8 +125,8 @@ void MainWindow::setToolBarClients()
                                "max-width: 100px;"
                                "min-height: 15px;"
                                "max-height: 15px;");
-         ui->toolBarClients->addWidget(button);
 
+        ui->toolBarClients->addWidget(button);
 
          connect(button,&QAbstractButton::clicked,this,&MainWindow::slotGetNumberButton);
     }

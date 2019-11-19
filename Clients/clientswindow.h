@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QSqlQueryModel>
 
 namespace Ui {
 class ClientsWindow;
@@ -22,9 +23,12 @@ private slots:
 
 private:
     void createUI();
+    void createModels();
+    void createServerLists();
 private:
     Ui::ClientsWindow *ui;
     int clientID;
+    QSqlQueryModel *modelServers;
 };
 
 #endif // CLIENTSWINDOW_H

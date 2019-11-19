@@ -12,5 +12,7 @@
         <file>Images/servers.png</file>
         <file>Images/addIcon.png</file>
         <file>Images/remove.png</file>
+        <file>Images/yesicon.png</file>
+        <file>Images/NoIcon.png</file>
     </qresource>
 </RCC>

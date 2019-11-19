@@ -42,8 +42,6 @@ void FirmsDialog::createUI()
         showFirmInfo(k);
         ui->frameInfo->show();
     }
-
-
     ui->listViewClients->setModel(modelFirms);
     ui->listViewClients->setModelColumn(2);
 
@@ -56,7 +54,7 @@ void FirmsDialog::createModels()
     modelClients->setQuery("SELECT c.client_id, c.name FROM clients c");
 
     modelFirms = new QSqlTableModel();
-    modelFirms->setTable("FIRMS");
+    modelFirms->setTable("firms");
     setFilterClients();
 }
 
@@ -65,13 +63,13 @@ void FirmsDialog::createModels()
 void FirmsDialog::on_buttonBox_accepted()
 {
     QSqlQuery q;
-    QString strSQL = QString("UPDATE FIRMS SET "
-            "ADRESS = '%1', "
-            "OKPO = '%2', "
-            "INN = '%3', "
-            "DOGOVORNUM = '%4', "
-            "DOGOVORDATE = '%5' "
-        "WHERE (FIRM_ID = %6)")
+    QString strSQL = QString("UPDATE firms SET "
+            "address = '%1', "
+            "okpo = '%2', "
+            "inn = '%3', "
+            "dogovornum = '%4', "
+            "dogovordate = '%5' "
+        "WHERE (firm_id = %6)")
             .arg(ui->plainTextEditAdress->toPlainText().trimmed())
             .arg(ui->lineEditOKPO->text().trimmed())
             .arg(ui->lineEditINN->text().trimmed())
@@ -133,8 +131,8 @@ void FirmsDialog::addFirms()
                                  "", &ok);
     if (ok && !name.isEmpty()){
         QSqlQuery q;
-        q.prepare("INSERT INTO FIRMS (FIRM_ID, CLIENT_ID, NAME) "
-                  "VALUES (GEN_ID(GEN_FIRMS_ID,1), :clientID, :name)");
+        q.prepare("INSERT INTO firms (client_id, name) "
+                  "VALUES (:clientID, :name)");
         q.bindValue(":clientID", currentClientID);
         q.bindValue(":name", name.trimmed());
         if(!q.exec()) {
@@ -147,7 +145,7 @@ void FirmsDialog::addFirms()
 
 void FirmsDialog::setFilterClients()
 {
-    strFilter = QString("CLIENT_ID = %1").arg(currentClientID);
+    strFilter = QString("client_id = %1").arg(currentClientID);
     modelFirms->setFilter(strFilter);
     modelFirms->select();
 }

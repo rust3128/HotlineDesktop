@@ -1,6 +1,8 @@
 #include "clientswindow.h"
 #include "ui_clientswindow.h"
 #include "Clients/firmsdialog.h"
+#include "LoggingCategories/loggingcategories.h"
+#include <QTableWidgetItem>
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     QMainWindow(parent),
@@ -9,6 +11,7 @@ ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    createModels();
     createUI();
 
 }
@@ -34,6 +37,41 @@ void ClientsWindow::createUI()
     ui->labelName->setText(q.value(0).toString());
     ui->labelComments->setText(q.value(2).toString());
 
+
+    ui->tableWidgetServers->setColumnCount(4);
+    ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "Тип" << "Адрес" << "");
+    ui->tableWidgetServers->verticalHeader()->hide();
+    ui->tableWidgetServers->hideColumn(0);
+    ui->tableWidgetServers->resizeColumnsToContents();
+    createServerLists();
+
+
+}
+
+void ClientsWindow::createModels()
+{
+    modelServers = new QSqlQueryModel(this);
+    QString strSQL = QString("SELECT s.server_id, t.servertypename, s.connections, s.isactive FROM servers s "
+                             "LEFT JOIN serverstype t ON t.servertype_id = s.servertype_id "
+                             "WHERE s.client_id = %1 "
+                             "ORDER BY s.server_id").arg(clientID);
+    modelServers->setQuery(strSQL);
+    if(modelServers->lastError().isValid()) qCritical(logCritical()) << "Не возможно получить список серверов." << modelServers->lastError().text();
+}
+
+void ClientsWindow::createServerLists()
+{
+      const int rowCoun = modelServers->rowCount();
+      const int columnCount = modelServers->columnCount();
+      for(int row = 0; row<rowCoun; ++row){
+          ui->tableWidgetServers->insertRow(row);
+          for(int col=0; col<columnCount; ++col) {
+              if(col == columnCount-1){
+                  ui->tableWidgetServers->setItem(row,col, new QTableWidgetItem(QIcon(":/Images/yesicon.png"),"Активен"));
+              }
+              ui->tableWidgetServers->setItem(row,col, new QTableWidgetItem(modelServers->data(modelServers->index(row,col)).toString()));
+          }
+      }
 }
 
 void ClientsWindow::on_pushButtonFirms_clicked()

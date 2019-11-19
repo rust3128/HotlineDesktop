@@ -54,8 +54,8 @@ void AddClientDialog::on_buttonBox_accepted()
                                            .arg(ui->lineEditName->text().trimmed()));
         if(result == QMessageBox::Yes){
             QSqlQuery q;
-            q.prepare("INSERT INTO CLIENTS (CLIENT_ID, NAME, LOGO, COMMENTS) "
-                      "VALUES (GEN_ID(GEN_CLIENTS_ID,1), :name, :logo, :comments)");
+            q.prepare("INSERT INTO clients (name, logo, comments) "
+                      "VALUES (:name, :logo, :comments)");
             q.bindValue(":name", ui->lineEditName->text().trimmed());
             q.bindValue(":logo", inByteArray);
             q.bindValue(":comments", ui->plainTextEdit->toPlainText());
@@ -68,8 +68,8 @@ void AddClientDialog::on_buttonBox_accepted()
     } else {
         QSqlQuery q;
 
-        q.prepare("UPDATE CLIENTS SET NAME = :name, LOGO = :logo, COMMENTS = :comments "
-                  "WHERE CLIENT_ID = :clientID");
+        q.prepare("UPDATE clients SET name = :name, logo = :logo, comments = :comments "
+                  "WHERE client_id = :clientID");
         q.bindValue(":name", ui->lineEditName->text().trimmed());
         q.bindValue(":logo",  (record->value(2).isNull()) ? inByteArray : logoArray);
         q.bindValue(":comments", ui->plainTextEdit->toPlainText());
@@ -104,7 +104,6 @@ void AddClientDialog::createUI()
     ui->lineEditName->setText(record->value(1).toString());
     QPixmap outPixmap = QPixmap();
     logoArray = record->value(2).toByteArray();
-    qDebug(logDebug()) << "LogoArray" << logoArray;
     outPixmap.loadFromData(logoArray);
     if(!outPixmap.isNull())
         ui->labelLogo->setPixmap(outPixmap);
