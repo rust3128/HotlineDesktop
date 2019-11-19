@@ -21,10 +21,13 @@ public:
 private slots:
     void on_pushButtonFirms_clicked();
 
+    void on_toolButtonAddServer_clicked();
+
 private:
     void createUI();
     void createModels();
     void createServerLists();
+
 private:
     Ui::ClientsWindow *ui;
     int clientID;
