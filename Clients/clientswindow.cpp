@@ -3,7 +3,7 @@
 #include "Clients/firmsdialog.h"
 #include "Clients/addserverdialog.h"
 #include "LoggingCategories/loggingcategories.h"
-#include <QTableWidgetItem>
+
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     QMainWindow(parent),
@@ -76,6 +76,8 @@ void ClientsWindow::createServerLists()
       ui->tableWidgetServers->resizeColumnsToContents();
 }
 
+
+
 void ClientsWindow::on_pushButtonFirms_clicked()
 {
     FirmsDialog *firmsDlg = new FirmsDialog(clientID,this);
@@ -84,13 +86,27 @@ void ClientsWindow::on_pushButtonFirms_clicked()
 
 void ClientsWindow::on_toolButtonAddServer_clicked()
 {
-    AddServerDialog *addSer = new AddServerDialog(-1, clientID, this);
+    static QSqlRecord r;
+    r.clear();
+    modifyServerList(&r);
+}
+
+void ClientsWindow::on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item)
+{
+    const int idServer = ui->tableWidgetServers->item(item->row(),0)->data(Qt::DisplayRole).toInt();
+    static QSqlRecord r = modelServers->record(idServer-1);
+    modifyServerList(&r);
+}
+void ClientsWindow::modifyServerList(QSqlRecord *rec)
+{
+    AddServerDialog *addSer = new AddServerDialog(rec, clientID, this);
     addSer->exec();
     if(addSer->result() == QDialog::Accepted){
         ui->tableWidgetServers->clear();
         ui->tableWidgetServers->setRowCount(0);
-        modelServers->setQuery(modelServers->query());
-        ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "Тип" << "Адрес" << "");
+        modelServers->setQuery(modelServers->query().lastQuery());
+        ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Адрес");
+        qInfo(logInfo()) << "Model Row Count " << modelServers->rowCount();
         createServerLists();
     }
 }

@@ -5,6 +5,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QSqlQueryModel>
+#include <QTableWidgetItem>
+#include <QSqlRecord>
 
 namespace Ui {
 class ClientsWindow;
@@ -23,10 +25,13 @@ private slots:
 
     void on_toolButtonAddServer_clicked();
 
+    void on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item);
+
 private:
     void createUI();
     void createModels();
     void createServerLists();
+    void modifyServerList(QSqlRecord *rec);
 
 private:
     Ui::ClientsWindow *ui;

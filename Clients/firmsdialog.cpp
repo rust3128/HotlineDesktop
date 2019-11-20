@@ -31,16 +31,20 @@ void FirmsDialog::createUI()
     ui->buttonBox->button(QDialogButtonBox::Save)->hide();
     ui->comboBoxClients->setModel(modelClients);
     ui->comboBoxClients->setModelColumn(1);
-    ui->comboBoxClients->setCurrentIndex(currentClientID);
-    ui->comboBoxClients->setCurrentText("Выберите клиента...");
+
 
     if(currentClientID !=-1){
-        ui->comboBoxClients->hide();
+//        ui->comboBoxClients->setDisabled(true);
+        qInfo(logInfo()) << "Current client ID" << currentFirmID;
+        ui->comboBoxClients->setCurrentIndex(currentClientID);
         setFilterClients();
         QModelIndex k = modelFirms->index(0,0);
         ui->listViewClients->setCurrentIndex(k);
         showFirmInfo(k);
         ui->frameInfo->show();
+    } else {
+        ui->comboBoxClients->setCurrentIndex(currentClientID);
+        ui->comboBoxClients->setCurrentText("Выберите клиента...");
     }
     ui->listViewClients->setModel(modelFirms);
     ui->listViewClients->setModelColumn(2);

@@ -3,12 +3,13 @@
 #include "LoggingCategories/loggingcategories.h"
 #include <QPushButton>
 #include <QMessageBox>
+#include <QInputDialog>
 
-AddServerDialog::AddServerDialog(int servID, int clID, QWidget *parent) :
+AddServerDialog::AddServerDialog(QSqlRecord *r, int clID, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddServerDialog),
-    serverId(servID),
-    clientID(clID)
+    clientID(clID),
+    recordServer(r)
 {
     ui->setupUi(this);
     createModels();
@@ -24,14 +25,16 @@ void AddServerDialog::createUI()
 {
     ui->comboBoxServerType->setModel(modelServersType);
     ui->comboBoxServerType->setModelColumn(1);
-    ui->buttonBox->button(QDialogButtonBox::Save)->setDisabled(true);
-    if(serverId>0){
-        //Редактирование
-    } else {
+    if(recordServer->isEmpty()){
         ui->comboBoxServerType->setCurrentIndex(-1);
         ui->comboBoxServerType->setEditable(true);
         ui->comboBoxServerType->setCurrentText("Укажите тип сервера...");
         ui->checkBoxIsActive->setChecked(true);
+        ui->buttonBox->button(QDialogButtonBox::Save)->setDisabled(true);
+    } else {
+        ui->lineEditServerName->setText(recordServer->value(3).toString());
+        ui->comboBoxServerType->setCurrentIndex(recordServer->value(2).toInt()+1);
+        ui->checkBoxIsActive->setChecked(recordServer->value(1).toBool());
     }
 }
 
@@ -61,18 +64,44 @@ void AddServerDialog::on_buttonBox_accepted()
         if(result == QMessageBox::No) return;
     }
     QSqlQuery *q = new QSqlQuery();
-    q->prepare("INSERT INTO `hd2`.`servers` (`client_id`, `servertype_id`, `connections`, `isactive`) VALUES (:clientID, :serverTypeID, :connections, :isActive)");
-    q->bindValue(":clientID", clientID);
+    if(recordServer->isEmpty()){
+        q->prepare("INSERT INTO servers (`client_id`, `servertype_id`, `connections`, `isactive`) VALUES (:clientID, :serverTypeID, :connections, :isActive)");
+        q->bindValue(":clientID", clientID);
+    } else {
+        q->prepare("UPDATE servers SET `servertype_id`= :serverTypeID, `connections` = :connections, `isactive` = :isActive WHERE server_id = :serverID" );
+        q->bindValue(":serverID", recordServer->value(0).toInt());
+    }
     q->bindValue(":serverTypeID", currentType);
     q->bindValue(":connections", ui->lineEditServerName->text().trimmed());
     q->bindValue(":isActive", ui->checkBoxIsActive->isChecked());
     if(!q->exec()) {
-        qCritical(logCritical()) << "Не возможно добавить новый сервер!" << q->lastError().text();
+        qCritical(logCritical()) << "Не возможно обновить информацию о серверах!" << q->lastError().text();
         return;
     } else {
-        qInfo(logInfo()) << "Сервер" << ui->lineEditServerName->text().trimmed() << "успешно добавленю";
+        qInfo(logInfo()) << "Информация о сервере" << ui->lineEditServerName->text().trimmed() << "успешно обновлена";
         this->accept();
     }
 
+
+}
+
+void AddServerDialog::on_toolButton_clicked()
+{
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Новый тип сервера"),
+                                         tr("Укажите новый адрес сервера:"), QLineEdit::Normal,
+                                         "", &ok);
+    if (ok && !text.isEmpty()){
+        QSqlQuery q;
+        q.prepare("INSERT INTO serverstype (servertypename) VALUES (:typename)");
+        q.bindValue(":typename", text.trimmed());
+        if(!q.exec()){
+            qCritical(logCritical()) << "Не удалось добавить новый тип сервера." << q.lastError().text();
+            return;
+        }
+        modelServersType->setQuery(modelServersType->query().lastQuery());
+        ui->comboBoxServerType->setCurrentIndex(-1);
+
+    }
 
 }

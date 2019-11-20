@@ -20,7 +20,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext &context, const QSt
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    qApp->setStyleSheet("QToolTip{background-color: rgb(255,255,255); border: 2px solid darkkhaki; padding: 5px; border-radius: 1px; }");
 
     // Устанавливаем файл логирования
     m_logFile.reset(new QFile("HotlineDesktop.log"));
