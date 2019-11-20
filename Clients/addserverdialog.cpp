@@ -12,6 +12,7 @@ AddServerDialog::AddServerDialog(QSqlRecord *r, int clID, QWidget *parent) :
     recordServer(r)
 {
     ui->setupUi(this);
+    qInfo(logInfo()) << "currentType" << recordServer->value(2).toInt();
     createModels();
     createUI();
 }
@@ -33,7 +34,9 @@ void AddServerDialog::createUI()
         ui->buttonBox->button(QDialogButtonBox::Save)->setDisabled(true);
     } else {
         ui->lineEditServerName->setText(recordServer->value(3).toString());
-        ui->comboBoxServerType->setCurrentIndex(recordServer->value(2).toInt()+1);
+        currentType = recordServer->value(2).toInt();
+            qInfo(logInfo()) << "currentType" << currentType;
+        ui->comboBoxServerType->setCurrentIndex(currentType);
         ui->checkBoxIsActive->setChecked(recordServer->value(1).toBool());
     }
 }
@@ -71,9 +74,11 @@ void AddServerDialog::on_buttonBox_accepted()
         q->prepare("UPDATE servers SET `servertype_id`= :serverTypeID, `connections` = :connections, `isactive` = :isActive WHERE server_id = :serverID" );
         q->bindValue(":serverID", recordServer->value(0).toInt());
     }
+    qInfo(logInfo()) << "currentType" << currentType;
     q->bindValue(":serverTypeID", currentType);
     q->bindValue(":connections", ui->lineEditServerName->text().trimmed());
-    q->bindValue(":isActive", ui->checkBoxIsActive->isChecked());
+    q->bindValue(":isActive", QVariant(ui->checkBoxIsActive->isChecked()).toString());
+
     if(!q->exec()) {
         qCritical(logCritical()) << "Не возможно обновить информацию о серверах!" << q->lastError().text();
         return;

@@ -67,7 +67,8 @@ void ClientsWindow::createServerLists()
           ui->tableWidgetServers->insertRow(row);
           for(int col=0; col<columnCount; ++col) {
               if(col == 1){
-                  ui->tableWidgetServers->setItem(row,col, new QTableWidgetItem(QIcon(":/Images/yesicon.png"),nullptr));
+                  QIcon icon = (modelServers->data(modelServers->index(row,col)).toBool()) ? QIcon(":/Images/yesicon.png") : QIcon(":/Images/NoIcon.png");
+                  ui->tableWidgetServers->setItem(row,col, new QTableWidgetItem(icon,nullptr));
                   continue;
               }
               ui->tableWidgetServers->setItem(row,col, new QTableWidgetItem(modelServers->data(modelServers->index(row,col)).toString()));
@@ -95,6 +96,7 @@ void ClientsWindow::on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *it
 {
     const int idServer = ui->tableWidgetServers->item(item->row(),0)->data(Qt::DisplayRole).toInt();
     static QSqlRecord r = modelServers->record(idServer-1);
+    qInfo(logInfo()) << "currentType" << r.value(2).toInt();
     modifyServerList(&r);
 }
 void ClientsWindow::modifyServerList(QSqlRecord *rec)
@@ -106,7 +108,6 @@ void ClientsWindow::modifyServerList(QSqlRecord *rec)
         ui->tableWidgetServers->setRowCount(0);
         modelServers->setQuery(modelServers->query().lastQuery());
         ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Адрес");
-        qInfo(logInfo()) << "Model Row Count " << modelServers->rowCount();
         createServerLists();
     }
 }

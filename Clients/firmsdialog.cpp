@@ -6,10 +6,10 @@
 #include <QInputDialog>
 #include <QDir>
 
-FirmsDialog::FirmsDialog(int clientID, QWidget *parent) :
+FirmsDialog::FirmsDialog(int clnID, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FirmsDialog),
-    currentClientID(clientID)
+    currentClientID(clnID)
 {
     ui->setupUi(this);
 
@@ -34,9 +34,8 @@ void FirmsDialog::createUI()
 
 
     if(currentClientID !=-1){
-//        ui->comboBoxClients->setDisabled(true);
-        qInfo(logInfo()) << "Current client ID" << currentFirmID;
-        ui->comboBoxClients->setCurrentIndex(currentClientID);
+        ui->comboBoxClients->setDisabled(true);
+        ui->comboBoxClients->setCurrentIndex(currentClientID-1);
         setFilterClients();
         QModelIndex k = modelFirms->index(0,0);
         ui->listViewClients->setCurrentIndex(k);
