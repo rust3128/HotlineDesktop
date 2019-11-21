@@ -12,7 +12,6 @@ AddServerDialog::AddServerDialog(QSqlRecord *r, int clID, QWidget *parent) :
     recordServer(r)
 {
     ui->setupUi(this);
-    qInfo(logInfo()) << "currentType" << recordServer->value(2).toInt();
     createModels();
     createUI();
 }
@@ -34,9 +33,8 @@ void AddServerDialog::createUI()
         ui->buttonBox->button(QDialogButtonBox::Save)->setDisabled(true);
     } else {
         ui->lineEditServerName->setText(recordServer->value(3).toString());
-        currentType = recordServer->value(2).toInt();
-            qInfo(logInfo()) << "currentType" << currentType;
-        ui->comboBoxServerType->setCurrentIndex(currentType);
+        currentType = recordServer->value(4).toInt();
+        ui->comboBoxServerType->setCurrentIndex(currentType-1);
         ui->checkBoxIsActive->setChecked(recordServer->value(1).toBool());
     }
 }
@@ -106,7 +104,6 @@ void AddServerDialog::on_toolButton_clicked()
         }
         modelServersType->setQuery(modelServersType->query().lastQuery());
         ui->comboBoxServerType->setCurrentIndex(-1);
-
     }
 
 }

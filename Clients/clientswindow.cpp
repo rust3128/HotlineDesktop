@@ -40,9 +40,10 @@ void ClientsWindow::createUI()
 
 
     ui->tableWidgetServers->setColumnCount(4);
-    ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Адрес");
+    ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Подключение");
     ui->tableWidgetServers->verticalHeader()->hide();
     ui->tableWidgetServers->hideColumn(0);
+    ui->tableWidgetServers->hideColumn(4);
     createServerLists();
 
 
@@ -51,7 +52,7 @@ void ClientsWindow::createUI()
 void ClientsWindow::createModels()
 {
     modelServers = new QSqlQueryModel(this);
-    QString strSQL = QString("SELECT s.server_id, s.isactive, t.servertypename, s.connections FROM servers s "
+    QString strSQL = QString("SELECT s.server_id, s.isactive, t.servertypename, s.connections, s.servertype_id FROM servers s "
                              "LEFT JOIN serverstype t ON t.servertype_id = s.servertype_id "
                              "WHERE s.client_id = %1 "
                              "ORDER BY s.server_id").arg(clientID);
@@ -95,8 +96,8 @@ void ClientsWindow::on_toolButtonAddServer_clicked()
 void ClientsWindow::on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item)
 {
     const int idServer = ui->tableWidgetServers->item(item->row(),0)->data(Qt::DisplayRole).toInt();
-    static QSqlRecord r = modelServers->record(idServer-1);
-    qInfo(logInfo()) << "currentType" << r.value(2).toInt();
+    qInfo(logInfo()) << "Current row" << item->row() << "idServer" << idServer;
+    QSqlRecord r = modelServers->record(item->row());
     modifyServerList(&r);
 }
 void ClientsWindow::modifyServerList(QSqlRecord *rec)
@@ -107,7 +108,7 @@ void ClientsWindow::modifyServerList(QSqlRecord *rec)
         ui->tableWidgetServers->clear();
         ui->tableWidgetServers->setRowCount(0);
         modelServers->setQuery(modelServers->query().lastQuery());
-        ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Адрес");
+        ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Подключение");
         createServerLists();
     }
 }
