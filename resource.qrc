@@ -15,5 +15,6 @@
         <file>Images/yesicon.png</file>
         <file>Images/NoIcon.png</file>
         <file>Images/connect.png</file>
+        <file>Images/ping-icon.png</file>
     </qresource>
 </RCC>

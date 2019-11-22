@@ -28,6 +28,7 @@ SOURCES += \
     DynamicButton/dynamiicbutton.cpp \
     GlobalSettings/globalsettings.cpp \
     LoggingCategories/loggingcategories.cpp \
+    PingModel/pingmodel.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -42,6 +43,7 @@ HEADERS += \
     DynamicButton/dynamiicbutton.h \
     GlobalSettings/globalsettings.h \
     LoggingCategories/loggingcategories.h \
+    PingModel/pingmodel.h \
     mainwindow.h
 
 FORMS += \

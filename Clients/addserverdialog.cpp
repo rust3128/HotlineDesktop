@@ -32,6 +32,7 @@ void AddServerDialog::createUI()
         ui->checkBoxIsActive->setChecked(true);
         ui->buttonBox->button(QDialogButtonBox::Save)->setDisabled(true);
     } else {
+        this->setWindowTitle("Редактирование параметров сервера");
         ui->lineEditServerName->setText(recordServer->value(3).toString());
         currentType = recordServer->value(4).toInt();
         ui->comboBoxServerType->setCurrentIndex(currentType-1);

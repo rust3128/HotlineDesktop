@@ -3,6 +3,7 @@
 #include "Clients/firmsdialog.h"
 #include "Clients/addserverdialog.h"
 #include "LoggingCategories/loggingcategories.h"
+#include <QListWidgetItem>
 
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
@@ -111,4 +112,13 @@ void ClientsWindow::modifyServerList(QSqlRecord *rec)
         ui->tableWidgetServers->setHorizontalHeaderLabels(QStringList() << "ID" << "" << "Тип" << "Подключение");
         createServerLists();
     }
+}
+
+void ClientsWindow::on_toolButtonPing_clicked()
+{
+    QString connectServer;
+    QList<QTableWidgetItem*>itemList = ui->tableWidgetServers->selectedItems();
+    if(itemList.isEmpty()) return;
+    connectServer = itemList.at(2)->text();
+    qInfo(logInfo()) << "Server" << connectServer;
 }

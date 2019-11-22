@@ -27,6 +27,8 @@ private slots:
 
     void on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item);
 
+    void on_toolButtonPing_clicked();
+
 private:
     void createUI();
     void createModels();
