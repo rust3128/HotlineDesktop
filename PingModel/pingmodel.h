@@ -1,6 +1,5 @@
 #ifndef PINGMODEL_H
 #define PINGMODEL_H
-
 #include <QObject>
 #include <QProcess>
 
@@ -8,7 +7,7 @@ class PingModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit PingModel(QString host, QObject *parent = nullptr);
+    explicit PingModel(QString *host, QObject *parent = nullptr);
     ~PingModel();
 
     void start_command();
@@ -16,7 +15,7 @@ public:
     bool finished();
     
 signals:
-    
+    void signalSendOutPing(QByteArray);
 public slots:
     void verifyStatus();
     void readResult();
@@ -24,7 +23,8 @@ public slots:
 private:
     QProcess *ping;
     bool running;
-    QString pingHost;
+    QString *pingHost;
+
 };
 
 #endif // PINGMODEL_H

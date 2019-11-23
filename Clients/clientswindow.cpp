@@ -4,6 +4,8 @@
 #include "Clients/addserverdialog.h"
 #include "LoggingCategories/loggingcategories.h"
 #include <QListWidgetItem>
+#include <QKeyEvent>
+#include "pingoutdialog.h"
 
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
@@ -77,6 +79,12 @@ void ClientsWindow::createServerLists()
           }
       }
       ui->tableWidgetServers->resizeColumnsToContents();
+      ui->tableWidgetServers->selectRow(0);
+      ui->tableWidgetServers->setFocus();
+      // Имитируем нажатие кнопки Tab, чтобы выделить строку
+      QKeyEvent* pe = new QKeyEvent(QEvent::KeyPress,
+              Qt::Key_Tab,Qt::NoModifier, "Tab");
+      QApplication::sendEvent(ui->tableWidgetServers, pe) ;
 }
 
 
@@ -120,5 +128,6 @@ void ClientsWindow::on_toolButtonPing_clicked()
     QList<QTableWidgetItem*>itemList = ui->tableWidgetServers->selectedItems();
     if(itemList.isEmpty()) return;
     connectServer = itemList.at(2)->text();
-    qInfo(logInfo()) << "Server" << connectServer;
+    PingOutDialog *pingDlg = new PingOutDialog(&connectServer,this);
+    pingDlg->exec();
 }

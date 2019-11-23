@@ -2,14 +2,15 @@
 #include <QDebug>
 #include "pingmodel.h"
 
-PingModel::PingModel(QString host, QObject *parent) :
+
+PingModel::PingModel(QString *host, QObject *parent) :
     QObject(parent), running(false),
     pingHost(host)
 {
     ping = new QProcess(this);
     connect(ping, SIGNAL(started()), this, SLOT(verifyStatus()));
     connect(ping, SIGNAL(finished(int)), this, SLOT(readResult()));
-//    ping->setProcessChannelMode(QProcess::MergedChannels);
+    ping->setProcessChannelMode(QProcess::MergedChannels);
 }
 
 PingModel::~PingModel(){
@@ -29,14 +30,15 @@ void PingModel::verifyStatus(){
 
 void PingModel::readResult(){
     running = false;
-    qDebug() << QString::fromStdString(ping->readLine().toStdString()).trimmed();
+    emit signalSendOutPing(ping->readLine());
+
 }
 
 void PingModel::start_command(){
     if(ping){
         QString command = "ping";
         QStringList args;
-        args << "-w" <<  "3" <<  pingHost;
+        args << "-w" <<  "3" << "-t" << *pingHost;
         ping->start(command, args);
         ping->waitForStarted(7000);
         running = true;

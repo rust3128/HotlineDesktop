@@ -23,6 +23,7 @@ SOURCES += \
     Clients/clientslistdialog.cpp \
     Clients/clientswindow.cpp \
     Clients/firmsdialog.cpp \
+    Clients/pingoutdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
     DynamicButton/dynamiicbutton.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     Clients/clientslistdialog.h \
     Clients/clientswindow.h \
     Clients/firmsdialog.h \
+    Clients/pingoutdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
     DynamicButton/dynamiicbutton.h \
@@ -52,6 +54,7 @@ FORMS += \
     Clients/clientslistdialog.ui \
     Clients/clientswindow.ui \
     Clients/firmsdialog.ui \
+    Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
     mainwindow.ui
 
