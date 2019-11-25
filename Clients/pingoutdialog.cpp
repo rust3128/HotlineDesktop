@@ -11,7 +11,7 @@ PingOutDialog::PingOutDialog(QString *hostAdress, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    this->setWindowTitle(QString("ping -t %1").arg(*hostAdress));
+    this->setWindowTitle(QString("ping  %1").arg(*hostAdress));
     modelPing = new PingModel(hostAdress,this);
     connect(modelPing,&PingModel::signalSendOutPing,this,&PingOutDialog::slotGetPingString);
     connect(this,&PingOutDialog::signalStartPing,this,&PingOutDialog::slotStartPing);

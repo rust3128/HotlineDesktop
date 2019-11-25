@@ -10,7 +10,7 @@ PingModel::PingModel(QString *host, QObject *parent) :
     ping = new QProcess(this);
     connect(ping, SIGNAL(started()), this, SLOT(verifyStatus()));
     connect(ping, SIGNAL(finished(int)), this, SLOT(readResult()));
-    ping->setProcessChannelMode(QProcess::MergedChannels);
+//    ping->setProcessChannelMode(QProcess::MergedChannels);
 }
 
 PingModel::~PingModel(){
@@ -38,11 +38,15 @@ void PingModel::start_command(){
     if(ping){
         QString command = "ping";
         QStringList args;
+#ifdef Q_OS_WIN
         args << "-w" <<  "3" << "-t" << *pingHost;
+#else
+        args << *pingHost;
+#endif
         ping->start(command, args);
         ping->waitForStarted(7000);
         running = true;
-        ping->waitForFinished(5000);
+//        ping->waitForFinished(5000);
     }
 }
 
