@@ -6,6 +6,7 @@
 #include <QListWidgetItem>
 #include <QKeyEvent>
 #include "pingoutdialog.h"
+#include "Clients/fbserverform.h"
 
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :

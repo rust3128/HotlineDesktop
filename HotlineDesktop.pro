@@ -22,6 +22,7 @@ SOURCES += \
     Clients/addserverdialog.cpp \
     Clients/clientslistdialog.cpp \
     Clients/clientswindow.cpp \
+    Clients/fbserverform.cpp \
     Clients/firmsdialog.cpp \
     Clients/pingoutdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     Clients/addserverdialog.h \
     Clients/clientslistdialog.h \
     Clients/clientswindow.h \
+    Clients/fbserverform.h \
     Clients/firmsdialog.h \
     Clients/pingoutdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
@@ -53,6 +55,7 @@ FORMS += \
     Clients/addserverdialog.ui \
     Clients/clientslistdialog.ui \
     Clients/clientswindow.ui \
+    Clients/fbserverform.ui \
     Clients/firmsdialog.ui \
     Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \

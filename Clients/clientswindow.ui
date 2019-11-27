@@ -129,7 +129,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <x>0</x>
          <y>0</y>
          <width>952</width>
-         <height>599</height>
+         <height>588</height>
         </rect>
        </property>
        <attribute name="label">
@@ -235,6 +235,16 @@ QToolBox::tab:selected { /* italicize selected tabs */
          </item>
         </layout>
        </widget>
+       <widget class="FBServerForm" name="widgetFBServer" native="true">
+        <property name="geometry">
+         <rect>
+          <x>370</x>
+          <y>20</y>
+          <width>231</width>
+          <height>211</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="pageAZSList">
        <property name="geometry">
@@ -242,7 +252,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <x>0</x>
          <y>0</y>
          <width>952</width>
-         <height>599</height>
+         <height>588</height>
         </rect>
        </property>
        <attribute name="label">
@@ -255,7 +265,7 @@ QToolBox::tab:selected { /* italicize selected tabs */
          <x>0</x>
          <y>0</y>
          <width>952</width>
-         <height>599</height>
+         <height>588</height>
         </rect>
        </property>
        <attribute name="label">
@@ -278,6 +288,14 @@ QToolBox::tab:selected { /* italicize selected tabs */
    </attribute>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FBServerForm</class>
+   <extends>QWidget</extends>
+   <header location="global">Clients/fbserverform.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resource.qrc"/>
  </resources>
