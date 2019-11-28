@@ -3,9 +3,17 @@
 
 #include <QGroupBox>
 
+
+
 namespace Ui {
 class FBServerForm;
 }
+
+enum TypeSql {
+    SELECT,
+    INSERT,
+    UPDATE
+};
 
 class FBServerForm : public QGroupBox
 {
@@ -15,14 +23,27 @@ public:
     explicit FBServerForm(QWidget *parent = nullptr);
     ~FBServerForm();
 
+
 protected:
     void changeEvent(QEvent *e);
 
+public slots:
+    void slotGetClientID(int ID);
 private slots:
-    void on_FBServerForm_clicked();
+    void slotIsTextChanged();
+private:
+    void createUI();
+    void setEditable();
+    void executeSQL(int type);
 
 private:
     Ui::FBServerForm *ui;
+    QPalette mEditable;
+    QPalette  mNonEditable;
+    bool bEditable;
+    bool bTextChanged;
+    int mClientID;
+    int mConnectID;
 
     // QWidget interface
 protected:

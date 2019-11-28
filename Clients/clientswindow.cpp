@@ -15,8 +15,13 @@ ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     clientID(clID)
 {
     ui->setupUi(this);
+    createConnections();
+    emit signalSendClientID(clientID);
+
 
     createModels();
+
+
     createUI();
 
 }
@@ -24,6 +29,11 @@ ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
 ClientsWindow::~ClientsWindow()
 {
     delete ui;
+}
+
+int ClientsWindow::sentClientID()
+{
+    return clientID;
 }
 
 void ClientsWindow::createUI()
@@ -51,6 +61,11 @@ void ClientsWindow::createUI()
     createServerLists();
 
 
+}
+
+void ClientsWindow::createConnections()
+{
+    connect(this,&ClientsWindow::signalSendClientID,ui->widgetFBServer,&FBServerForm::slotGetClientID);
 }
 
 void ClientsWindow::createModels()
