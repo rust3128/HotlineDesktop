@@ -23,6 +23,9 @@ public slots:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_treeView_doubleClicked(const QModelIndex &idx);
+
 private:
     void createUI();
 private:

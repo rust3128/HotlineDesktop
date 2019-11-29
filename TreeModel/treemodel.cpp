@@ -189,10 +189,19 @@ void TreeModel::setupModelData(TreeItem *parent)
               "WHERE client_id =:clientID");
     q.bindValue(":clientID", clientID);
     q.exec();
+    QVector<QVariant> columnData;
     while(q.next()){
-        QVector<QVariant> columnData;
-        columnData << q.value(2).toString() << q.value(2).toString();
+        columnData.clear();
+        columnData << q.value(1).toString() << q.value(4).toString();
         parents.last()->appendChild(new TreeItem(columnData, parents.last()));
+        columnData.clear();
+        columnData << "Телефон" << q.value(2).toString();
+        parents << parents.last()->child(parents.last()->childCount()-1);
+        parents.last()->appendChild(new TreeItem(columnData, parents.last()));
+        columnData.clear();
+        columnData << "E-mail" << q.value(3).toString();
+        parents.last()->appendChild(new TreeItem(columnData, parents.last()));
+        parents.pop_back();
     }
 
 //    int number = 0;

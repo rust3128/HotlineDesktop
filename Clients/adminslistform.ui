@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>253</height>
+    <width>260</width>
+    <height>182</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,31 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTreeView" name="treeView"/>
+    <widget class="QTreeView" name="treeView">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights">
+      <bool>true</bool>
+     </property>
+     <property name="animated">
+      <bool>true</bool>
+     </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="headerCascadingSectionResizes">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="headerHighlightSections">
+      <bool>true</bool>
+     </attribute>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -36,4 +36,10 @@ void AdminsListForm::changeEvent(QEvent *e)
 void AdminsListForm::createUI()
 {
     ui->treeView->setModel(model);
+    ui->treeView->resizeColumnToContents(0);
+}
+
+void AdminsListForm::on_treeView_doubleClicked(const QModelIndex &idx)
+{
+    qInfo(logInfo()) << idx.row() << idx.column();
 }
