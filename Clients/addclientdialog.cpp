@@ -31,7 +31,7 @@ void AddClientDialog::on_plainTextEdit_textChanged()
 
 void AddClientDialog::on_pushButtonLoad_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть логотип"), "", tr("Изображения (*.png *.jpeg *.jpg)"));
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Открыть логотип"), "", tr("Изображения (*.png *.jpeg *.jpg);;Все файлы (*.*)"));
     QPixmap inPixmap(fileName); // Сохраняем его в изображение объекта QPixmap;
 
     if(inPixmap.width()>800 || inPixmap.height()>600){

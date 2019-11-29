@@ -58,10 +58,7 @@ void ClientsListDialog::on_buttonBox_accepted()
 void ClientsListDialog::slotCurrentPic(QModelIndex idx)
 {
 
-    QPixmap outPixmap = QPixmap(); // Создаём QPixmap, который будет помещаться в picLabel
-    /* Забираем данные об изображении из таблицы в качестве QByteArray
-     * и помещаем их в QPixmap
-     * */
+    QPixmap outPixmap = QPixmap();
     outPixmap.loadFromData(modelClients->data(modelClients->index(idx.row(), 2)).toByteArray());
     // Устанавливаем изображение в picLabel
     if(!outPixmap.isNull())

@@ -20,6 +20,7 @@ win32: RC_ICONS = $$PWD/Images/supportIcon.ico
 SOURCES += \
     Clients/addclientdialog.cpp \
     Clients/addserverdialog.cpp \
+    Clients/adminslistform.cpp \
     Clients/clientslistdialog.cpp \
     Clients/clientswindow.cpp \
     Clients/fbserverform.cpp \
@@ -31,12 +32,15 @@ SOURCES += \
     GlobalSettings/globalsettings.cpp \
     LoggingCategories/loggingcategories.cpp \
     PingModel/pingmodel.cpp \
+    TreeModel/treeitem.cpp \
+    TreeModel/treemodel.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     Clients/addclientdialog.h \
     Clients/addserverdialog.h \
+    Clients/adminslistform.h \
     Clients/clientslistdialog.h \
     Clients/clientswindow.h \
     Clients/fbserverform.h \
@@ -48,11 +52,14 @@ HEADERS += \
     GlobalSettings/globalsettings.h \
     LoggingCategories/loggingcategories.h \
     PingModel/pingmodel.h \
+    TreeModel/treeitem.h \
+    TreeModel/treemodel.h \
     mainwindow.h
 
 FORMS += \
     Clients/addclientdialog.ui \
     Clients/addserverdialog.ui \
+    Clients/adminslistform.ui \
     Clients/clientslistdialog.ui \
     Clients/clientswindow.ui \
     Clients/fbserverform.ui \

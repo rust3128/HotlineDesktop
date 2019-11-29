@@ -37,7 +37,6 @@ void FBServerForm::changeEvent(QEvent *e)
 void FBServerForm::slotGetClientID(int ID)
 {
     mClientID = ID;
-    qInfo(logInfo()) << "Client ID" << mClientID;
     createUI();
 }
 
@@ -130,7 +129,6 @@ void FBServerForm::mouseDoubleClickEvent(QMouseEvent *event)
     Q_UNUSED(event)
     bEditable = !bEditable;
     setEditable();
-    qInfo(logInfo()) << "EDITABLE" << bEditable;
     if(!bEditable && bTextChanged){
         executeSQL(UPDATE);
     }
