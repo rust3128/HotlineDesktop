@@ -68,7 +68,7 @@ TreeModel::TreeModel(int ID, QObject *parent)
     : QAbstractItemModel(parent),
       clientID(ID)
 {
-    rootItem = new TreeItem({tr("Заголовок"), tr("Одробно")});
+    rootItem = new TreeItem({tr("Заголовок"), tr("Пдробно"),tr("id")});
     setupModelData(rootItem);
 }
 //! [0]
@@ -186,20 +186,21 @@ void TreeModel::setupModelData(TreeItem *parent)
 
     QSqlQuery q;
     q.prepare("SELECT contact_id, name, phone, email, `comment` FROM clientcontacts "
-              "WHERE client_id =:clientID");
+              "WHERE client_id =:clientID and isactive='true'");
     q.bindValue(":clientID", clientID);
     q.exec();
     QVector<QVariant> columnData;
     while(q.next()){
+        const int contactID = q.value(0).toInt();
         columnData.clear();
-        columnData << q.value(1).toString() << q.value(4).toString();
+        columnData << q.value(1).toString() << q.value(4).toString() << contactID;
         parents.last()->appendChild(new TreeItem(columnData, parents.last()));
         columnData.clear();
-        columnData << "Телефон" << q.value(2).toString();
+        columnData << "Телефон" << q.value(2).toString() <<contactID;
         parents << parents.last()->child(parents.last()->childCount()-1);
         parents.last()->appendChild(new TreeItem(columnData, parents.last()));
         columnData.clear();
-        columnData << "E-mail" << q.value(3).toString();
+        columnData << "E-mail" << q.value(3).toString() << contactID;
         parents.last()->appendChild(new TreeItem(columnData, parents.last()));
         parents.pop_back();
     }

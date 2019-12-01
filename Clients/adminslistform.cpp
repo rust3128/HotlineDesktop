@@ -2,6 +2,9 @@
 #include "ui_adminslistform.h"
 #include "LoggingCategories/loggingcategories.h"
 
+#include <QSqlQuery>
+#include <QSqlError>
+
 AdminsListForm::AdminsListForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AdminsListForm)
@@ -37,9 +40,18 @@ void AdminsListForm::createUI()
 {
     ui->treeView->setModel(model);
     ui->treeView->resizeColumnToContents(0);
+    ui->treeView->resizeColumnToContents(1);
+    ui->treeView->hideColumn(2);
 }
 
 void AdminsListForm::on_treeView_doubleClicked(const QModelIndex &idx)
 {
-    qInfo(logInfo()) << idx.row() << idx.column();
+    qInfo(logInfo()) << "--------------------";
+    qInfo(logInfo()) << "Parrent index Row" << idx.parent().row() << "Col" << idx.parent().column();
+    qInfo(logInfo()) << "Current index Row" << idx.row() << "Col" << idx.column();
+    qInfo(logInfo()) << "Current DATA:" << idx.data().toString();
+    const int row = (idx.parent().row() >= 0) ? idx.parent().row() : idx.row();
+    const int contactID = model->data(model->index(row,2),Qt::DisplayRole).toInt();
+    qInfo(logInfo()) << "Column 2 data" << model->data(model->index(row,2),Qt::DisplayRole).toString();
+
 }
