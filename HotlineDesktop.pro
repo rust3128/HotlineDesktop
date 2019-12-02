@@ -23,6 +23,7 @@ SOURCES += \
     Clients/adminslistform.cpp \
     Clients/clientslistdialog.cpp \
     Clients/clientswindow.cpp \
+    Clients/contactdialog.cpp \
     Clients/fbserverform.cpp \
     Clients/firmsdialog.cpp \
     Clients/pingoutdialog.cpp \
@@ -43,6 +44,7 @@ HEADERS += \
     Clients/adminslistform.h \
     Clients/clientslistdialog.h \
     Clients/clientswindow.h \
+    Clients/contactdialog.h \
     Clients/fbserverform.h \
     Clients/firmsdialog.h \
     Clients/pingoutdialog.h \
@@ -62,6 +64,7 @@ FORMS += \
     Clients/adminslistform.ui \
     Clients/clientslistdialog.ui \
     Clients/clientswindow.ui \
+    Clients/contactdialog.ui \
     Clients/fbserverform.ui \
     Clients/firmsdialog.ui \
     Clients/pingoutdialog.ui \

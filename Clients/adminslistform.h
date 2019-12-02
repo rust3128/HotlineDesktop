@@ -25,9 +25,11 @@ protected:
 
 private slots:
     void on_treeView_doubleClicked(const QModelIndex &idx);
+    void on_toolButtonAddContact_clicked();
 
 private:
     void createUI();
+    void changeContactInfo(int id);
 private:
     Ui::AdminsListForm *ui;
     TreeModel *model;
