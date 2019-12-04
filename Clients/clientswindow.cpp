@@ -67,7 +67,7 @@ void ClientsWindow::createConnections()
 {
     connect(this,&ClientsWindow::signalSendClientID,ui->widgetFBServer,&FBServerForm::slotGetClientID);
     connect(this,&ClientsWindow::signalSendClientID,ui->widgetAdmins,&AdminsListForm::slotGetClientID);
-
+    connect(this,&ClientsWindow::signalSendClientID,ui->widgetPaytypes,&PaytypeForm::slotGetClientID);
 }
 
 void ClientsWindow::createModels()

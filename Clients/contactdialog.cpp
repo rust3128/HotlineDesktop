@@ -39,7 +39,11 @@ void ContactDialog::changeEvent(QEvent *e)
 void ContactDialog::createUI()
 {
     modified = false;
-    if(contactID == -1) return;
+    if(contactID == -1) {
+        this->setWindowTitle("Новый контакт");
+        return;
+    }
+    this->setWindowTitle("Редактировать контакт");
     QSqlQuery q;
     q.prepare("SELECT name, phone, email, `comment`, isactive FROM clientcontacts WHERE contact_id =:contactID");
     q.bindValue(":contactID", contactID);

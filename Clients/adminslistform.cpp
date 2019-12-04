@@ -59,13 +59,13 @@ void AdminsListForm::changeContactInfo(int id)
 
 void AdminsListForm::on_treeView_doubleClicked(const QModelIndex &idx)
 {
-    qInfo(logInfo()) << "--------------------";
-    qInfo(logInfo()) << "Parrent index Row" << idx.parent().row() << "Col" << idx.parent().column();
-    qInfo(logInfo()) << "Current index Row" << idx.row() << "Col" << idx.column();
-    qInfo(logInfo()) << "Current DATA:" << idx.data().toString();
+//    qInfo(logInfo()) << "--------------------";
+//    qInfo(logInfo()) << "Parrent index Row" << idx.parent().row() << "Col" << idx.parent().column();
+//    qInfo(logInfo()) << "Current index Row" << idx.row() << "Col" << idx.column();
+//    qInfo(logInfo()) << "Current DATA:" << idx.data().toString();
     const int row = (idx.parent().row() >= 0) ? idx.parent().row() : idx.row();
     const int contactID = model->data(model->index(row,2),Qt::DisplayRole).toInt();
-    qInfo(logInfo()) << "Column 2 data" << model->data(model->index(row,2),Qt::DisplayRole).toString();
+//    qInfo(logInfo()) << "Column 2 data" << model->data(model->index(row,2),Qt::DisplayRole).toString();
     changeContactInfo(contactID);
 
 }
