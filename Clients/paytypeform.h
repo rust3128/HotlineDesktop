@@ -23,13 +23,20 @@ public slots:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_toolButtonAddPaytype_clicked();
+
+    void on_tableView_doubleClicked(const QModelIndex &idx);
+
 private:
     void createModel();
     void createUI();
+    void showPaytypeDialog(int id);
 private:
     Ui::PaytypeForm *ui;
     int clientID;
     ModelPaytypes *model;
+
 };
 
 #endif // PAYTYPEFORM_H

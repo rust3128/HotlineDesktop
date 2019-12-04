@@ -1,6 +1,8 @@
 #include "paytypeform.h"
 #include "ui_paytypeform.h"
 #include "LoggingCategories/loggingcategories.h"
+#include "paytypedialog.h"
+#include <QSqlQuery>
 
 PaytypeForm::PaytypeForm(QWidget *parent) :
     QGroupBox(parent),
@@ -39,7 +41,7 @@ void PaytypeForm::createModel()
     QString strSQL = QString("SELECT paytypes.paytype_id, paytypes.mpos_id, paytypes.name, paytypes.dllname, paytypes.isactive FROM paytypes WHERE paytypes.client_id = %1")
             .arg(clientID);
     model->setQuery(strSQL);
-    model->setHeaderData(1, Qt::Horizontal,"MPos\nID");
+    model->setHeaderData(1, Qt::Horizontal,"ID");
     model->setHeaderData(2, Qt::Horizontal,"Наименование");
     model->setHeaderData(3, Qt::Horizontal,"Плагин");
     model->setHeaderData(4, Qt::Horizontal,"Активен");
@@ -53,4 +55,22 @@ void PaytypeForm::createUI()
     ui->tableView->resizeColumnsToContents();
     ui->tableView->verticalHeader()->setMinimumSectionSize(ui->tableView->verticalHeader()->minimumSectionSize());
 
+}
+
+void PaytypeForm::showPaytypeDialog(int id)
+{
+    PaytypeDialog *payDlg = new PaytypeDialog(id, this);
+    if(payDlg->exec() == QDialog::Accepted) {
+         model->setQuery(model->query().lastQuery());
+    }
+}
+
+void PaytypeForm::on_toolButtonAddPaytype_clicked()
+{
+    showPaytypeDialog(-1);
+}
+
+void PaytypeForm::on_tableView_doubleClicked(const QModelIndex &idx)
+{
+    showPaytypeDialog(model->data(model->index(idx.row(),0),Qt::DisplayRole).toInt());
 }

@@ -27,6 +27,7 @@ SOURCES += \
     Clients/fbserverform.cpp \
     Clients/firmsdialog.cpp \
     Clients/modelpaytypes.cpp \
+    Clients/paytypedialog.cpp \
     Clients/paytypeform.cpp \
     Clients/pingoutdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     Clients/fbserverform.h \
     Clients/firmsdialog.h \
     Clients/modelpaytypes.h \
+    Clients/paytypedialog.h \
     Clients/paytypeform.h \
     Clients/pingoutdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
@@ -71,6 +73,7 @@ FORMS += \
     Clients/contactdialog.ui \
     Clients/fbserverform.ui \
     Clients/firmsdialog.ui \
+    Clients/paytypedialog.ui \
     Clients/paytypeform.ui \
     Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
