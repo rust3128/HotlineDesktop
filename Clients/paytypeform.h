@@ -3,6 +3,7 @@
 
 #include <QGroupBox>
 #include "modelpaytypes.h"
+#include <QSqlRecord>
 
 
 
@@ -31,11 +32,12 @@ private slots:
 private:
     void createModel();
     void createUI();
-    void showPaytypeDialog(int id);
+    void showPaytypeDialog(QSqlRecord *rec);
 private:
     Ui::PaytypeForm *ui;
     int clientID;
     ModelPaytypes *model;
+
 
 };
 

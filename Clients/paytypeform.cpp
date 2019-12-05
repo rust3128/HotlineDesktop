@@ -38,7 +38,7 @@ void PaytypeForm::changeEvent(QEvent *e)
 void PaytypeForm::createModel()
 {
     model = new ModelPaytypes();
-    QString strSQL = QString("SELECT paytypes.paytype_id, paytypes.mpos_id, paytypes.name, paytypes.dllname, paytypes.isactive FROM paytypes WHERE paytypes.client_id = %1")
+    QString strSQL = QString("SELECT paytypes.paytype_id, paytypes.mpos_id, paytypes.name, paytypes.dllname, paytypes.isactive, paytypes.client_id FROM paytypes WHERE paytypes.client_id = %1")
             .arg(clientID);
     model->setQuery(strSQL);
     model->setHeaderData(1, Qt::Horizontal,"ID");
@@ -51,15 +51,17 @@ void PaytypeForm::createUI()
 {
     ui->tableView->setModel(model);
     ui->tableView->hideColumn(0);
+    ui->tableView->hideColumn(5);
     ui->tableView->verticalHeader()->hide();
     ui->tableView->resizeColumnsToContents();
-    ui->tableView->verticalHeader()->setMinimumSectionSize(ui->tableView->verticalHeader()->minimumSectionSize());
+    ui->tableView->verticalHeader()->setDefaultSectionSize(ui->tableView->verticalHeader()->minimumSectionSize());
+
 
 }
 
-void PaytypeForm::showPaytypeDialog(int id)
+void PaytypeForm::showPaytypeDialog(QSqlRecord *rec)
 {
-    PaytypeDialog *payDlg = new PaytypeDialog(id, this);
+    PaytypeDialog *payDlg = new PaytypeDialog(rec, this);
     if(payDlg->exec() == QDialog::Accepted) {
          model->setQuery(model->query().lastQuery());
     }
@@ -67,10 +69,13 @@ void PaytypeForm::showPaytypeDialog(int id)
 
 void PaytypeForm::on_toolButtonAddPaytype_clicked()
 {
-    showPaytypeDialog(-1);
+    static QSqlRecord r;
+    r.clear();
+    showPaytypeDialog(&r);
 }
 
 void PaytypeForm::on_tableView_doubleClicked(const QModelIndex &idx)
 {
-    showPaytypeDialog(model->data(model->index(idx.row(),0),Qt::DisplayRole).toInt());
+    QSqlRecord r = model->record(idx.row());
+    showPaytypeDialog(&r);
 }

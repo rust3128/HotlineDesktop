@@ -97,6 +97,7 @@ void ClientsWindow::createServerLists()
           }
       }
       ui->tableWidgetServers->resizeColumnsToContents();
+      ui->tableWidgetServers->verticalHeader()->setDefaultSectionSize(ui->tableWidgetServers->verticalHeader()->minimumSectionSize());
       ui->tableWidgetServers->selectRow(0);
       ui->tableWidgetServers->setFocus();
       // Имитируем нажатие кнопки Tab, чтобы выделить строку
