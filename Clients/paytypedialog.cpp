@@ -56,6 +56,7 @@ void PaytypeDialog::on_buttonBox_accepted()
         QMessageBox::critical(this,"Ошибка","Не удалось обновить информацию от контакте.\n"+q.lastError().text());
         this->reject();
     } else {
+        QMessageBox::information(this,"Сообщение", tr("Информация о контакте успешно обновлена.")+q.lastError().text());
         qInfo(logInfo()) << tr("Информация о контакте успешно обновлена.");
         this->accept();
     }
