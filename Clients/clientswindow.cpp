@@ -45,8 +45,10 @@ void ClientsWindow::createUI()
     q.next();
     QPixmap outPixmap = QPixmap();
     outPixmap.loadFromData(q.value(1).toByteArray());
-    if(!outPixmap.isNull())
-        ui->labelLogo->setPixmap(outPixmap.scaledToWidth(150));
+    if(!outPixmap.isNull()){
+//        ui->labelLogo->setPixmap(outPixmap.scaledToWidth(150));
+        ui->labelLogo->setPixmap(  (outPixmap.size().width() > 90) ? outPixmap.scaledToWidth(90) : outPixmap  );
+    }
     else
         ui->labelLogo->clear();
     ui->labelName->setText(q.value(0).toString());

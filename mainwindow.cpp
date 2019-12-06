@@ -78,21 +78,22 @@ void MainWindow::slotGetNumberButton()
 {
     DynamiicButton *button = static_cast<DynamiicButton*>(sender());
     int clientID=button->getButtonID();
-    ClientsWindow *clnWnd = new ClientsWindow(clientID, this);
+    ClientsWindow *clnWnd = new ClientsWindow(clientID,this);
     clnWnd->setWindowTitle(button->text());
     if(mdiArea->subWindowList().size()>0){
         for(int i=0; i<mdiArea->subWindowList().size();++i) {
             if(mdiArea->subWindowList().at(i)->windowTitle() == button->text()) {
                 mdiArea->setActiveSubWindow(mdiArea->subWindowList().at(i));
+                mdiArea->subWindowList().at(i)->showMaximized();
                 return;
+            } else {
+                mdiArea->subWindowList().at(i)->showMinimized();
             }
 
         }
     }
     mdiArea->addSubWindow(clnWnd);
     clnWnd->showMaximized();
-
-
 }
 
 void MainWindow::setToolBarClients()
@@ -117,8 +118,9 @@ void MainWindow::setToolBarClients()
                                "border-radius:4;"
                                "padding: 3px;"
                                "font-size: 16px;"
-                               "font-variant:small-caps;"
-                               "font-family: courier;"
+                               "font-weight: bold;"
+                               "font-variant: small-caps;"
+                               "font-family: serif;"
                                "padding-left:5px;"
                                "padding-right: 5px;"
                                "min-width: 100px;"
