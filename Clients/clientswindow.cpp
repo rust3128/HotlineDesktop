@@ -15,15 +15,35 @@ ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     clientID(clID)
 {
     ui->setupUi(this);
+    ui->toolBoxMain->setStyleSheet("QToolBox::tab#toolBoxMain {"
+                            "   background: #009deb;"
+                                "border-radius: 5px;"
+                                "font-size: 15px;"
+                                "icon-size: 48px;"
+                                "color: black;"
+                            "}"
+                            "QToolBox::tab:first#toolBoxMain {"
+                                "background: #4ade00;"
+                                "border-radius: 5px;"
+                                "font-size: 15px;"
+                                "color: black;"
+                            "}"
+                            "QToolBox::tab:last#toolBoxMain {"
+                                "background: #f95300;"
+                                "border-radius: 5px;"
+                                "font-size: 15px;"
+                                "color: black;"
+                            "}"
+                            "QToolBox::tab:selected#toolBoxMain {" /* italicize selected tabs */
+                                "font: italic bold;"
+                                "font-size: 15px;"
+                                "color: white;"
+                            "}");
+
     createConnections();
     emit signalSendClientID(clientID);
-
-
     createModels();
-
-
     createUI();
-
 }
 
 ClientsWindow::~ClientsWindow()
@@ -46,7 +66,6 @@ void ClientsWindow::createUI()
     QPixmap outPixmap = QPixmap();
     outPixmap.loadFromData(q.value(1).toByteArray());
     if(!outPixmap.isNull()){
-//        ui->labelLogo->setPixmap(outPixmap.scaledToWidth(150));
         ui->labelLogo->setPixmap(  (outPixmap.size().width() > 90) ? outPixmap.scaledToWidth(90) : outPixmap  );
     }
     else
@@ -62,6 +81,16 @@ void ClientsWindow::createUI()
     ui->tableWidgetServers->hideColumn(4);
     createServerLists();
 
+    ui->tableViewTerminals->setModel(modelTerminals);
+    ui->tableViewTerminals->verticalHeader()->hide();
+    ui->tableViewTerminals->hideColumn(0);
+    ui->tableViewTerminals->hideColumn(1);
+    ui->tableViewTerminals->hideColumn(3);
+    ui->tableViewTerminals->resizeColumnsToContents();
+    ui->tableViewTerminals->verticalHeader()->setDefaultSectionSize(ui->tableViewTerminals->verticalHeader()->minimumSectionSize());
+
+    ui->toolButton->addAction(ui->actionAddContact);
+    ui->toolButton->addAction(ui->actionEditContact);
 
 }
 
@@ -81,6 +110,16 @@ void ClientsWindow::createModels()
                              "ORDER BY s.server_id").arg(clientID);
     modelServers->setQuery(strSQL);
     if(modelServers->lastError().isValid()) qCritical(logCritical()) << "Не возможно получить список серверов." << modelServers->lastError().text();
+    //Model Terminals
+    modelTerminals = new ModelTerminals(this);
+    modelTerminals->setTable("objects");
+    modelTerminals->setHeaderData(2, Qt::Horizontal, "АЗС");
+    modelTerminals->setHeaderData(4, Qt::Horizontal, "Наименование");
+    modelTerminals->setHeaderData(6, Qt::Horizontal, "Примечание");
+    modelTerminals->setHeaderData(5, Qt::Horizontal, "В работе");
+    QString strFilter = QString("client_id = %1").arg(clientID);
+    modelTerminals->setFilter(strFilter);
+    modelTerminals->select();
 }
 
 void ClientsWindow::createServerLists()
@@ -126,7 +165,6 @@ void ClientsWindow::on_toolButtonAddServer_clicked()
 void ClientsWindow::on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item)
 {
     const int idServer = ui->tableWidgetServers->item(item->row(),0)->data(Qt::DisplayRole).toInt();
-    qInfo(logInfo()) << "Current row" << item->row() << "idServer" << idServer;
     QSqlRecord r = modelServers->record(item->row());
     modifyServerList(&r);
 }
@@ -152,3 +190,5 @@ void ClientsWindow::on_toolButtonPing_clicked()
     PingOutDialog *pingDlg = new PingOutDialog(&connectServer,this);
     pingDlg->exec();
 }
+
+

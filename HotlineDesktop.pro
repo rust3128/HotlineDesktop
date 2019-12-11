@@ -27,6 +27,7 @@ SOURCES += \
     Clients/fbserverform.cpp \
     Clients/firmsdialog.cpp \
     Clients/modelpaytypes.cpp \
+    Clients/modelterminals.cpp \
     Clients/paytypedialog.cpp \
     Clients/paytypeform.cpp \
     Clients/pingoutdialog.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     Clients/fbserverform.h \
     Clients/firmsdialog.h \
     Clients/modelpaytypes.h \
+    Clients/modelterminals.h \
     Clients/paytypedialog.h \
     Clients/paytypeform.h \
     Clients/pingoutdialog.h \

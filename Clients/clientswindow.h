@@ -1,6 +1,7 @@
 #ifndef CLIENTSWINDOW_H
 #define CLIENTSWINDOW_H
 
+#include "modelterminals.h"
 #include <QMainWindow>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -28,6 +29,7 @@ private slots:
     void on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item);
     void on_toolButtonPing_clicked();
 
+
 private:
     void createUI();
     void createConnections();
@@ -40,6 +42,7 @@ private:
     Ui::ClientsWindow *ui;
     int clientID;
     QSqlQueryModel *modelServers;
+    ModelTerminals *modelTerminals;
 };
 
 #endif // CLIENTSWINDOW_H
