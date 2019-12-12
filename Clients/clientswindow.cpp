@@ -7,6 +7,7 @@
 #include <QKeyEvent>
 #include "pingoutdialog.h"
 #include "Clients/fbserverform.h"
+#include "objectcontactdialog.h"
 
 
 ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
@@ -44,6 +45,7 @@ ClientsWindow::ClientsWindow(int clID, QWidget *parent) :
     emit signalSendClientID(clientID);
     createModels();
     createUI();
+    connect(ui->tableViewTerminals->selectionModel(),&QItemSelectionModel::selectionChanged,this,&ClientsWindow::slotSelectionTerminals);
 }
 
 ClientsWindow::~ClientsWindow()
@@ -89,16 +91,20 @@ void ClientsWindow::createUI()
     ui->tableViewTerminals->resizeColumnsToContents();
     ui->tableViewTerminals->verticalHeader()->setDefaultSectionSize(ui->tableViewTerminals->verticalHeader()->minimumSectionSize());
 
-    ui->toolButton->addAction(ui->actionAddContact);
-    ui->toolButton->addAction(ui->actionEditContact);
+//    qInfo(logInfo()) << "Selection Model" << ui ->tableViewTerminals->selectionModel()->setModel(modelTerminals);
+//    ui ->tableViewTerminals->selectionModel()->setModel(modelTerminals);
+
 
 }
 
 void ClientsWindow::createConnections()
 {
-    connect(this,&ClientsWindow::signalSendClientID,ui->widgetFBServer,&FBServerForm::slotGetClientID);
+    connect(this,&ClientsWindow::signalSendClientID,ui->widgetFBServer,&FBServerForm::slotGetClientID,Qt::DirectConnection);
     connect(this,&ClientsWindow::signalSendClientID,ui->widgetAdmins,&AdminsListForm::slotGetClientID);
     connect(this,&ClientsWindow::signalSendClientID,ui->widgetPaytypes,&PaytypeForm::slotGetClientID);
+
+
+
 }
 
 void ClientsWindow::createModels()
@@ -117,9 +123,12 @@ void ClientsWindow::createModels()
     modelTerminals->setHeaderData(4, Qt::Horizontal, "Наименование");
     modelTerminals->setHeaderData(6, Qt::Horizontal, "Примечание");
     modelTerminals->setHeaderData(5, Qt::Horizontal, "В работе");
-    QString strFilter = QString("client_id = %1").arg(clientID);
+    QString strFilter = QString("client_id = %1 order by terminal_id").arg(clientID);
     modelTerminals->setFilter(strFilter);
     modelTerminals->select();
+
+   //Model Contacts
+
 }
 
 void ClientsWindow::createServerLists()
@@ -164,7 +173,6 @@ void ClientsWindow::on_toolButtonAddServer_clicked()
 
 void ClientsWindow::on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item)
 {
-    const int idServer = ui->tableWidgetServers->item(item->row(),0)->data(Qt::DisplayRole).toInt();
     QSqlRecord r = modelServers->record(item->row());
     modifyServerList(&r);
 }
@@ -191,4 +199,41 @@ void ClientsWindow::on_toolButtonPing_clicked()
     pingDlg->exec();
 }
 
+void ClientsWindow::slotSelectionTerminals(const QItemSelection &, const QItemSelection &)
+{
+    QModelIndexList selection = ui->tableViewTerminals->selectionModel()->selectedIndexes();
+    objectID = modelTerminals->data(modelTerminals->index(selection.at(0).row(),0),Qt::DisplayRole).toInt();
+    QString filterStr = QString("object_id=%1").arg(objectID);
 
+    qInfo(logInfo()) << "STR Filter" << filterStr;
+
+    ui->toolBoxInfo->setItemText(0, "Контакты "+modelTerminals->data(modelTerminals->index(selection.at(0).row(),2),Qt::DisplayRole).toString()+"\n"
+                                 + modelTerminals->data(modelTerminals->index(selection.at(0).row(),4),Qt::DisplayRole).toString());
+    modelObjContacts = new QSqlTableModel(this);
+    modelObjContacts->setTable("objectcontacts");
+    modelObjContacts->setFilter(filterStr);
+    modelObjContacts->select();
+
+    ui->tableViewObjectCont->setModel(modelObjContacts);
+    ui->tableViewObjectCont->hideColumn(0);
+    ui->tableViewObjectCont->hideColumn(1);
+    ui->tableViewObjectCont->resizeColumnsToContents();
+}
+
+
+
+
+void ClientsWindow::on_toolButtonAddObjectContact_clicked()
+{
+    ObjectContactDialog *objConn = new ObjectContactDialog(objectID, new QSqlRecord(), this);
+    objConn->exec();
+    modelObjContacts->select();
+}
+
+void ClientsWindow::on_tableViewObjectCont_doubleClicked(const QModelIndex &idx)
+{
+    QSqlRecord r = modelObjContacts->record(idx.row());
+    ObjectContactDialog *objConn = new ObjectContactDialog(objectID, &r, this);
+    objConn->exec();
+    modelObjContacts->select();
+}

@@ -28,6 +28,7 @@ SOURCES += \
     Clients/firmsdialog.cpp \
     Clients/modelpaytypes.cpp \
     Clients/modelterminals.cpp \
+    Clients/objectcontactdialog.cpp \
     Clients/paytypedialog.cpp \
     Clients/paytypeform.cpp \
     Clients/pingoutdialog.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     Clients/firmsdialog.h \
     Clients/modelpaytypes.h \
     Clients/modelterminals.h \
+    Clients/objectcontactdialog.h \
     Clients/paytypedialog.h \
     Clients/paytypeform.h \
     Clients/pingoutdialog.h \
@@ -75,6 +77,7 @@ FORMS += \
     Clients/contactdialog.ui \
     Clients/fbserverform.ui \
     Clients/firmsdialog.ui \
+    Clients/objectcontactdialog.ui \
     Clients/paytypedialog.ui \
     Clients/paytypeform.ui \
     Clients/pingoutdialog.ui \

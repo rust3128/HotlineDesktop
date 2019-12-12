@@ -8,6 +8,7 @@
 #include <QSqlQueryModel>
 #include <QTableWidgetItem>
 #include <QSqlRecord>
+#include <QItemSelectionModel>
 
 namespace Ui {
 class ClientsWindow;
@@ -28,7 +29,11 @@ private slots:
     void on_toolButtonAddServer_clicked();
     void on_tableWidgetServers_itemDoubleClicked(QTableWidgetItem *item);
     void on_toolButtonPing_clicked();
+    void slotSelectionTerminals(const QItemSelection &, const QItemSelection &);
 
+    void on_toolButtonAddObjectContact_clicked();
+
+    void on_tableViewObjectCont_doubleClicked(const QModelIndex &index);
 
 private:
     void createUI();
@@ -41,8 +46,10 @@ private:
 private:
     Ui::ClientsWindow *ui;
     int clientID;
+    int objectID;
     QSqlQueryModel *modelServers;
     ModelTerminals *modelTerminals;
+    QSqlTableModel *modelObjContacts;
 };
 
 #endif // CLIENTSWINDOW_H

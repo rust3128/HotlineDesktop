@@ -115,7 +115,7 @@
          <x>0</x>
          <y>0</y>
          <width>952</width>
-         <height>626</height>
+         <height>617</height>
         </rect>
        </property>
        <attribute name="label">
@@ -273,7 +273,7 @@
          <x>0</x>
          <y>0</y>
          <width>952</width>
-         <height>626</height>
+         <height>617</height>
         </rect>
        </property>
        <attribute name="label">
@@ -331,13 +331,13 @@ QToolBox::tab {font-size: 15px;}</string>
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="page">
+          <widget class="QWidget" name="pageContacts">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
              <width>464</width>
-             <height>519</height>
+             <height>509</height>
             </rect>
            </property>
            <attribute name="icon">
@@ -348,34 +348,50 @@ QToolBox::tab {font-size: 15px;}</string>
             <string>Контакты</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_8">
-            <item row="1" column="0">
-             <widget class="QTableView" name="tableView"/>
+            <item row="0" column="0" rowspan="3">
+             <widget class="QTableView" name="tableViewObjectCont">
+              <property name="font">
+               <font>
+                <pointsize>12</pointsize>
+               </font>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <attribute name="horizontalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderVisible">
+               <bool>false</bool>
+              </attribute>
+             </widget>
             </item>
-            <item row="0" column="0">
-             <widget class="QToolButton" name="toolButton">
+            <item row="0" column="1">
+             <widget class="QToolButton" name="toolButtonAddObjectContact">
+              <property name="toolTip">
+               <string>Добавить контакт</string>
+              </property>
               <property name="text">
-               <string>Выберите действие</string>
+               <string>...</string>
               </property>
-              <property name="checkable">
-               <bool>false</bool>
+              <property name="icon">
+               <iconset resource="../resource.qrc">
+                <normaloff>:/Images/addIcon.png</normaloff>:/Images/addIcon.png</iconset>
               </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoRepeat">
-               <bool>false</bool>
-              </property>
-              <property name="popupMode">
-               <enum>QToolButton::MenuButtonPopup</enum>
-              </property>
-              <property name="toolButtonStyle">
-               <enum>Qt::ToolButtonTextUnderIcon</enum>
-              </property>
-              <property name="autoRaise">
-               <bool>false</bool>
-              </property>
-              <property name="arrowType">
-               <enum>Qt::NoArrow</enum>
+              <property name="shortcut">
+               <string>Ins</string>
               </property>
              </widget>
             </item>
@@ -386,8 +402,8 @@ QToolBox::tab {font-size: 15px;}</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>464</width>
-             <height>551</height>
+             <width>100</width>
+             <height>30</height>
             </rect>
            </property>
            <attribute name="label">
@@ -413,23 +429,6 @@ QToolBox::tab {font-size: 15px;}</string>
     <bool>false</bool>
    </attribute>
   </widget>
-  <action name="actionAddContact">
-   <property name="icon">
-    <iconset resource="../resource.qrc">
-     <normaloff>:/Images/addIcon.png</normaloff>:/Images/addIcon.png</iconset>
-   </property>
-   <property name="text">
-    <string>Добавить</string>
-   </property>
-  </action>
-  <action name="actionEditContact">
-   <property name="text">
-    <string>Изменить</string>
-   </property>
-   <property name="toolTip">
-    <string>Изменить</string>
-   </property>
-  </action>
  </widget>
  <customwidgets>
   <customwidget>
