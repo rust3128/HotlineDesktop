@@ -19,9 +19,16 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_buttonBox_rejected();
+
+    void on_buttonBox_accepted();
+
 private:
     Ui::ObjectContactDialog *ui;
     int objectID;
+    int contactID;
+    bool isNew;
 };
 
 #endif // OBJECTCONTACTDIALOG_H
