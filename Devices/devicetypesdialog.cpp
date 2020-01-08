@@ -1,5 +1,6 @@
 #include "devicetypesdialog.h"
 #include "ui_devicetypesdialog.h"
+#include <QSqlQuery>
 
 DeviceTypesDialog::DeviceTypesDialog(QWidget *parent) :
     QDialog(parent),
@@ -34,4 +35,16 @@ void DeviceTypesDialog::createUI()
 
     ui->listView->setModel(model);
     ui->listView->setModelColumn(1);
+}
+
+void DeviceTypesDialog::on_toolButtonAdd_clicked()
+{
+    QSqlQuery q;
+    q.exec("INSERT INTO devicetype (devtypename) VALUES ('Новое устройство')");
+    model->select();
+}
+
+void DeviceTypesDialog::on_buttonBox_rejected()
+{
+    this->reject();
 }

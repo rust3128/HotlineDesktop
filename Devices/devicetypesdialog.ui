@@ -21,7 +21,7 @@
    <item row="0" column="0" alignment="Qt::AlignTop">
     <widget class="QToolButton" name="toolButtonAdd">
      <property name="toolTip">
-      <string>Добавить контакт</string>
+      <string>Добавить устройство</string>
      </property>
      <property name="text">
       <string>...</string>

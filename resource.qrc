@@ -19,5 +19,6 @@
         <file>Images/contacts.png</file>
         <file>Images/contactsbig.png</file>
         <file>Images/device.png</file>
+        <file>Images/database.png</file>
     </qresource>
 </RCC>

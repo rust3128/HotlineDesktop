@@ -19,6 +19,11 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_toolButtonAdd_clicked();
+
+    void on_buttonBox_rejected();
+
 private:
     void createUI();
 private:

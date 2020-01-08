@@ -209,6 +209,7 @@ void ClientsWindow::slotSelectionTerminals(const QItemSelection &, const QItemSe
             + modelTerminals->data(modelTerminals->index(selection.at(0).row(),4),Qt::DisplayRole).toString();
     ui->toolBoxInfo->setItemText(0, "Контакты"+infoText);
     ui->toolBoxInfo->setItemText(1, "Устройства"+infoText);
+    ui->toolBoxInfo->setItemText(2, "База данных"+infoText);
 
     modelObjContacts = new QSqlTableModel(this);
     modelObjContacts->setTable("objectcontacts");

@@ -329,15 +329,15 @@ QToolBox::tab {font-size: 15px;}</string>
            <number>0</number>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>2</number>
           </property>
           <widget class="QWidget" name="pageContacts">
            <property name="geometry">
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>464</width>
-             <height>509</height>
+             <width>304</width>
+             <height>350</height>
             </rect>
            </property>
            <attribute name="icon">
@@ -416,7 +416,7 @@ QToolBox::tab {font-size: 15px;}</string>
              <x>0</x>
              <y>0</y>
              <width>464</width>
-             <height>475</height>
+             <height>447</height>
             </rect>
            </property>
            <attribute name="icon">
@@ -425,6 +425,15 @@ QToolBox::tab {font-size: 15px;}</string>
            </attribute>
            <attribute name="label">
             <string>Оборудование</string>
+           </attribute>
+          </widget>
+          <widget class="QWidget" name="pageDatabase">
+           <attribute name="icon">
+            <iconset resource="../resource.qrc">
+             <normaloff>:/Images/database.png</normaloff>:/Images/database.png</iconset>
+           </attribute>
+           <attribute name="label">
+            <string>База данных</string>
            </attribute>
           </widget>
          </widget>
