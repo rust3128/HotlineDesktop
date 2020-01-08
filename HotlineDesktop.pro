@@ -34,6 +34,8 @@ SOURCES += \
     Clients/pingoutdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
+    Devices/devicetypesdialog.cpp \
+    Devices/postypedialog.cpp \
     DynamicButton/dynamiicbutton.cpp \
     GlobalSettings/globalsettings.cpp \
     LoggingCategories/loggingcategories.cpp \
@@ -60,6 +62,8 @@ HEADERS += \
     Clients/pingoutdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
+    Devices/devicetypesdialog.h \
+    Devices/postypedialog.h \
     DynamicButton/dynamiicbutton.h \
     GlobalSettings/globalsettings.h \
     LoggingCategories/loggingcategories.h \
@@ -82,6 +86,8 @@ FORMS += \
     Clients/paytypeform.ui \
     Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
+    Devices/devicetypesdialog.ui \
+    Devices/postypedialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.

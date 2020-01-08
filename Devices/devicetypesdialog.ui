@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DeviceTypesDialog</class>
+ <widget class="QDialog" name="DeviceTypesDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>271</width>
+    <height>366</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Типы рабочмх мест</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../resource.qrc">
+    <normaloff>:/Images/device.png</normaloff>:/Images/device.png</iconset>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" alignment="Qt::AlignTop">
+    <widget class="QToolButton" name="toolButtonAdd">
+     <property name="toolTip">
+      <string>Добавить контакт</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resource.qrc">
+       <normaloff>:/Images/addIcon.png</normaloff>:/Images/addIcon.png</iconset>
+     </property>
+     <property name="shortcut">
+      <string>Ins</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QListView" name="listView"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resource.qrc"/>
+ </resources>
+ <connections/>
+</ui>

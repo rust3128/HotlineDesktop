@@ -205,10 +205,11 @@ void ClientsWindow::slotSelectionTerminals(const QItemSelection &, const QItemSe
     objectID = modelTerminals->data(modelTerminals->index(selection.at(0).row(),0),Qt::DisplayRole).toInt();
     QString filterStr = QString("object_id=%1").arg(objectID);
 
-    qInfo(logInfo()) << "STR Filter" << filterStr;
+    QString infoText = " "+modelTerminals->data(modelTerminals->index(selection.at(0).row(),2),Qt::DisplayRole).toString()+"\n"
+            + modelTerminals->data(modelTerminals->index(selection.at(0).row(),4),Qt::DisplayRole).toString();
+    ui->toolBoxInfo->setItemText(0, "Контакты"+infoText);
+    ui->toolBoxInfo->setItemText(1, "Устройства"+infoText);
 
-    ui->toolBoxInfo->setItemText(0, "Контакты "+modelTerminals->data(modelTerminals->index(selection.at(0).row(),2),Qt::DisplayRole).toString()+"\n"
-                                 + modelTerminals->data(modelTerminals->index(selection.at(0).row(),4),Qt::DisplayRole).toString());
     modelObjContacts = new QSqlTableModel(this);
     modelObjContacts->setTable("objectcontacts");
     modelObjContacts->setFilter(filterStr);
@@ -219,9 +220,6 @@ void ClientsWindow::slotSelectionTerminals(const QItemSelection &, const QItemSe
     ui->tableViewObjectCont->hideColumn(1);
     ui->tableViewObjectCont->resizeColumnsToContents();
 }
-
-
-
 
 void ClientsWindow::on_toolButtonAddObjectContact_clicked()
 {

@@ -24,6 +24,10 @@ private slots:
     void on_actionClientsList_triggered();
     void on_actionFirms_triggered();
     void slotGetNumberButton();
+    void on_actionDevis_triggered();
+
+    void on_actionPoss_triggered();
+
 private:
     void setToolBarClients();
 private:

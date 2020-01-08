@@ -6,6 +6,8 @@
 #include "Clients/firmsdialog.h"
 #include "Clients/clientswindow.h"
 #include "DynamicButton/dynamiicbutton.h"
+#include "Devices/devicetypesdialog.h"
+#include "Devices/postypedialog.h"
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -134,4 +136,16 @@ void MainWindow::setToolBarClients()
     }
     q.finish();
 
+}
+
+void MainWindow::on_actionDevis_triggered()
+{
+    DeviceTypesDialog *devTypeDlg = new DeviceTypesDialog(this);
+    devTypeDlg->exec();
+}
+
+void MainWindow::on_actionPoss_triggered()
+{
+    PosTypeDialog *posTypeDlg = new PosTypeDialog(this);
+    posTypeDlg->exec();
 }

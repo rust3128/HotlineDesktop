@@ -52,8 +52,16 @@
      <addaction name="actionFirms"/>
      <addaction name="actionRegions"/>
     </widget>
+    <widget class="QMenu" name="menuCatalogs">
+     <property name="title">
+      <string>Справочники</string>
+     </property>
+     <addaction name="actionDevis"/>
+     <addaction name="actionPoss"/>
+    </widget>
     <addaction name="menu"/>
     <addaction name="actionConnSettings"/>
+    <addaction name="menuCatalogs"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSettings"/>
@@ -131,6 +139,20 @@
   <action name="actionRegions">
    <property name="text">
     <string>Регионы</string>
+   </property>
+  </action>
+  <action name="actionDevis">
+   <property name="text">
+    <string>Типы устройств</string>
+   </property>
+  </action>
+  <action name="actionPoss">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/device.png</normaloff>:/Images/device.png</iconset>
+   </property>
+   <property name="text">
+    <string>Типы рабочих мест</string>
    </property>
   </action>
  </widget>

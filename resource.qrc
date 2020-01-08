@@ -18,5 +18,6 @@
         <file>Images/ping-icon.png</file>
         <file>Images/contacts.png</file>
         <file>Images/contactsbig.png</file>
+        <file>Images/device.png</file>
     </qresource>
 </RCC>
