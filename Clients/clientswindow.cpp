@@ -3,6 +3,7 @@
 #include "Clients/firmsdialog.h"
 #include "Clients/addserverdialog.h"
 #include "LoggingCategories/loggingcategories.h"
+#include "Devices/kassaform.h"
 #include <QListWidgetItem>
 #include <QKeyEvent>
 #include "pingoutdialog.h"
@@ -89,10 +90,12 @@ void ClientsWindow::createUI()
     ui->tableViewTerminals->hideColumn(1);
     ui->tableViewTerminals->hideColumn(3);
     ui->tableViewTerminals->resizeColumnsToContents();
+    ui->tableViewTerminals->horizontalHeader()->stretchLastSection();
     ui->tableViewTerminals->verticalHeader()->setDefaultSectionSize(ui->tableViewTerminals->verticalHeader()->minimumSectionSize());
 
 //    qInfo(logInfo()) << "Selection Model" << ui ->tableViewTerminals->selectionModel()->setModel(modelTerminals);
 //    ui ->tableViewTerminals->selectionModel()->setModel(modelTerminals);
+    ui->tabWidgetComp->addTab(new KassaForm(), "Касса 1");
 
 
 }
@@ -208,7 +211,7 @@ void ClientsWindow::slotSelectionTerminals(const QItemSelection &, const QItemSe
     QString infoText = " "+modelTerminals->data(modelTerminals->index(selection.at(0).row(),2),Qt::DisplayRole).toString()+"\n"
             + modelTerminals->data(modelTerminals->index(selection.at(0).row(),4),Qt::DisplayRole).toString();
     ui->toolBoxInfo->setItemText(0, "Контакты"+infoText);
-    ui->toolBoxInfo->setItemText(1, "Устройства"+infoText);
+    ui->toolBoxInfo->setItemText(1, "Рабочие места"+infoText);
     ui->toolBoxInfo->setItemText(2, "База данных"+infoText);
 
     modelObjContacts = new QSqlTableModel(this);

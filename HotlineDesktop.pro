@@ -35,6 +35,7 @@ SOURCES += \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
     Devices/devicetypesdialog.cpp \
+    Devices/kassaform.cpp \
     Devices/postypedialog.cpp \
     DynamicButton/dynamiicbutton.cpp \
     GlobalSettings/globalsettings.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
     Devices/devicetypesdialog.h \
+    Devices/kassaform.h \
     Devices/postypedialog.h \
     DynamicButton/dynamiicbutton.h \
     GlobalSettings/globalsettings.h \
@@ -87,6 +89,7 @@ FORMS += \
     Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
     Devices/devicetypesdialog.ui \
+    Devices/kassaform.ui \
     Devices/postypedialog.ui \
     mainwindow.ui
 
