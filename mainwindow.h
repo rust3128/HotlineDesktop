@@ -28,6 +28,8 @@ private slots:
 
     void on_actionPoss_triggered();
 
+    void on_actionBanks_triggered();
+
 private:
     void setToolBarClients();
 private:

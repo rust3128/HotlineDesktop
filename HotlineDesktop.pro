@@ -34,6 +34,7 @@ SOURCES += \
     Clients/pingoutdialog.cpp \
     ConnectionSettingDialog/connectionsettingdialog.cpp \
     DataBase/database.cpp \
+    Devices/banksdialog.cpp \
     Devices/devicetypesdialog.cpp \
     Devices/kassaform.cpp \
     Devices/postypedialog.cpp \
@@ -63,6 +64,7 @@ HEADERS += \
     Clients/pingoutdialog.h \
     ConnectionSettingDialog/connectionsettingdialog.h \
     DataBase/database.h \
+    Devices/banksdialog.h \
     Devices/devicetypesdialog.h \
     Devices/kassaform.h \
     Devices/postypedialog.h \
@@ -88,6 +90,7 @@ FORMS += \
     Clients/paytypeform.ui \
     Clients/pingoutdialog.ui \
     ConnectionSettingDialog/connectionsettingdialog.ui \
+    Devices/banksdialog.ui \
     Devices/devicetypesdialog.ui \
     Devices/kassaform.ui \
     Devices/postypedialog.ui \

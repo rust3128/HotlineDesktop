@@ -8,6 +8,7 @@
 #include "DynamicButton/dynamiicbutton.h"
 #include "Devices/devicetypesdialog.h"
 #include "Devices/postypedialog.h"
+#include "Devices/banksdialog.h"
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
@@ -148,4 +149,10 @@ void MainWindow::on_actionPoss_triggered()
 {
     PosTypeDialog *posTypeDlg = new PosTypeDialog(this);
     posTypeDlg->exec();
+}
+
+void MainWindow::on_actionBanks_triggered()
+{
+    BanksDialog *bankDlg = new BanksDialog(this);
+    bankDlg->exec();
 }

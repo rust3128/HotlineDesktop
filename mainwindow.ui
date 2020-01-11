@@ -58,6 +58,7 @@
      </property>
      <addaction name="actionDevis"/>
      <addaction name="actionPoss"/>
+     <addaction name="actionBanks"/>
     </widget>
     <addaction name="menu"/>
     <addaction name="actionConnSettings"/>
@@ -153,6 +154,15 @@
    </property>
    <property name="text">
     <string>Типы рабочих мест</string>
+   </property>
+  </action>
+  <action name="actionBanks">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/Images/bank.png</normaloff>:/Images/bank.png</iconset>
+   </property>
+   <property name="text">
+    <string>Банки</string>
    </property>
   </action>
  </widget>

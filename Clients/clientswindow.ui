@@ -438,8 +438,11 @@ QToolBox::tab {font-size: 15px;}</string>
               <property name="currentIndex">
                <number>-1</number>
               </property>
+              <property name="elideMode">
+               <enum>Qt::ElideNone</enum>
+              </property>
               <property name="documentMode">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="tabsClosable">
                <bool>false</bool>
@@ -453,8 +456,8 @@ QToolBox::tab {font-size: 15px;}</string>
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>464</width>
-             <height>413</height>
+             <width>100</width>
+             <height>30</height>
             </rect>
            </property>
            <attribute name="icon">
