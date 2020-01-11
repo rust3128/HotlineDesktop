@@ -48,7 +48,7 @@ void BanksDialog::createUI()
 void BanksDialog::on_toolButtonAdd_clicked()
 {
     QSqlQuery q;
-    q.exec("INSERT INTO `banks` (`mfo`, `bankname`) VALUES ('Новый МФО', 'Новое название')");
+    q.exec("INSERT INTO `banks` (`mfo`, `bankname`) VALUES (111111, 'Новое название')");
     model->select();
     ui->tableView->resizeColumnsToContents();
 }
